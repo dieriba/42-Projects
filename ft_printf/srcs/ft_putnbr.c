@@ -1,8 +1,8 @@
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
-int ft_getlen(int n)
+static int	ft_getlen(int n)
 {
-	int len;
+	int	len;
 
 	len = 1;
 	while (n / 10 != 0)
@@ -31,7 +31,7 @@ int	ft_putnbr(int n, int *count)
 		len /= 10;
 		val++;
 	}
-	if (!*(count))
+	if (!(*count))
 		*count = val;
 	return (*count);
 }

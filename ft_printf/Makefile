@@ -1,28 +1,49 @@
-NAME		=	libprintf_bonus.a
+NAME		=	libftprintf.a
 
-SRCS 		=	ft_printf_bonus.c \
-					srcs_bonus/ft_putchar.c \
-					srcs_bonus/ft_print_no_format.c \
-					srcs_bonus/ft_strlen.c \
-					srcs_bonus/ft_print_zero.c \
-					srcs_bonus/ft_print_plus.c \
-					srcs_bonus/ft_print_space.c \
-					srcs_bonus/ft_print_minus.c \
-					srcs_bonus/ft_print_hash.c \
-					srcs_bonus/ft_print_char.c \
-					srcs_bonus/ft_isdigit.c \
-					srcs_bonus/ft_isspace.c \
-					srcs_bonus/ft_checker.c \
-					srcs_bonus/ft_putnb_uns.c \
-					srcs_bonus/ft_putnbr.c \
-					srcs_bonus/ft_putnbr_base_hexa.c \
-					srcs_bonus/ft_putstr_fd.c \
-					srcs_bonus/ft_write_add.c \
+SRCS 		=	ft_printf.c \
+				srcs/ft_putchar.c \
+				srcs/ft_atoi.c \
+				srcs/ft_strlen.c \
+				srcs/ft_print_zero.c \
+				srcs/ft_print_plus.c \
+				srcs/ft_print_space.c \
+				srcs/ft_print_minus.c \
+				srcs/ft_print_hash.c \
+				srcs/ft_print_char.c \
+				srcs/ft_isdigit.c \
+				srcs/ft_isspace.c \
+				srcs/ft_checker.c \
+				srcs/ft_putnb_uns.c \
+				srcs/ft_putnbr.c \
+				srcs/ft_putnbr_base_hexa.c \
+				srcs/ft_putstr_fd.c \
+				srcs/ft_write_add.c \
 
 OBJS		=	${SRCS:.c=.o}
-INCLUDES	=	-I includes_bonus
+
+INCLUDES	=	-I includes
+
+BONUS		=	ft_printf.c \
+				srcs/ft_putchar.c \
+				srcs/ft_print_no_format.c \
+				srcs/ft_strlen.c \
+				srcs/ft_print_zero.c \
+				srcs/ft_print_plus.c \
+				srcs/ft_print_space.c \
+				srcs/ft_print_minus.c \
+				srcs/ft_print_hash.c \
+				srcs/ft_print_char.c \
+				srcs/ft_isdigit.c \
+				srcs/ft_isspace.c \
+				srcs/ft_checker.c \
+				srcs/ft_putnb_uns.c \
+				srcs/ft_putnbr.c \
+				srcs/ft_putnbr_base_hexa.c \
+				srcs/ft_putstr_fd.c \
+				srcs/ft_write_add.c \
 
 CC			=	gcc
+
 CFLAGS		=	-Wall -Wextra -Werror
 
 .c.o :	
@@ -34,11 +55,13 @@ ${NAME}:	${OBJS}
 			ar -rcs ${NAME} ${OBJS}
 			ranlib ${NAME}
 
+bonus : ${NAME}
+
 clean:
-			rm -f ${OBJS}
+			rm -rf ${OBJS}
 
 fclean:		clean
-			rm -f ${NAME}
+			rm -rf ${NAME}
 
 re:			fclean all
 

@@ -8,15 +8,6 @@
 #define BASE_FORMAT "cspdiuxX%%"
 #define FLAGS "-0.# +"
 
-typedef struct t_format
-{
-    char    *str;
-    int     width;
-    size_t     *i;
-    va_list *args_infos;
-
-}t_format;
-
 int ft_putchar(char c);
 int ft_putnbr_uns(unsigned int nbr, int *count);
 int ft_putnbr_base_hex(unsigned int nbr, int transform, int *count);

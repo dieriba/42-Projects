@@ -1,4 +1,4 @@
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 static unsigned int	get_len(unsigned int n, int *count)
 {
@@ -15,10 +15,10 @@ static unsigned int	get_len(unsigned int n, int *count)
 	return (len);
 }
 
-int ft_putnbr_uns(unsigned int n, int *count)
+int	ft_putnbr_uns(unsigned int n, int *count)
 {
-	unsigned int len;
-	int val;
+	unsigned int	len;
+	int				val;
 
 	val = 0;
 	len = get_len(n, count);
