@@ -2,6 +2,7 @@
 #define COMMON_H
 
 #define SA struct sigaction
+#define BUFFER_SIZE 49
 #include <stdlib.h>
 #include <signal.h>
 #include <sys/types.h>
