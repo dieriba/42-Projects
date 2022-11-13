@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 14:11:50 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/08 14:11:50 by dtoure           ###   ########.fr       */
+/*   Created: 2022/11/11 18:14:39 by dtoure            #+#    #+#             */
+/*   Updated: 2022/11/11 18:14:39 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+int	ft_atoi(const char *format, int *pos)
 {
-	char	*dest_ptr;
-	char	*src_ptr;
-	size_t	i;
+	char	*str;
+	int		num;
+	int		i;
 
-	if (dest == NULL || src == NULL)
-		return (NULL);
-	i = 0;
-	dest_ptr = (char *)dest;
-	src_ptr = (char *)src;
-	while (i < n)
-	{
-		dest_ptr[i] = src_ptr[i];
-		i++;
-	}
-	return (dest);
+	i = *pos;
+	num = 0;
+	str = (char *)format;
+	while (str[++i] && ft_isdigit(str[i]))
+		num = num + str[i] - '0';
+	return (num);
 }

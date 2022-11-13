@@ -1,10 +1,7 @@
+#include "ft_printf.h"
+#include <limits.h>
 
-#include <stdio.h>
-#include "limits.h"
-#include "./includes/ft_printf.h"
-int main()
+int main (void)
 {
-
-    ft_printf("return valuie : %i", ft_printf(" %+d ", 0));
-    return 0;
+    printf("%i\n", INT_MIN);
 }
