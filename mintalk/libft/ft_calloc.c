@@ -15,9 +15,8 @@
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void				*buff;
-
-	if (nmemb >= SIZE_MAX || size >= SIZE_MAX)
-		return (NULL);
+	if (!size || !nmenb)
+		return ;
 	buff = malloc(size * nmemb);
 	if (!buff)
 		return (NULL);
