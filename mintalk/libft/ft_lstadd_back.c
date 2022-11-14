@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/08 14:11:00 by dtoure            #+#    #+#             */
+/*   Updated: 2022/11/08 14:11:00 by dtoure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **alst, t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-    if (*(alst) == NULL)
-        *(alst) = new;
-    else
-        {
-            t_list  *lst;
+	t_list	*node;
 
-            lst = ft_lstlast(*(alst));
-            lst -> next = new;           
-        }
+	if (!(*lst))
+		(*lst) = new;
+	else
+	{
+		node = ft_lstlast(*lst);
+		node -> next = new;
+	}
 }

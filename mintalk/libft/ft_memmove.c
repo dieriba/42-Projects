@@ -1,45 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/08 14:11:54 by dtoure            #+#    #+#             */
+/*   Updated: 2022/11/08 14:11:54 by dtoure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "libft.h"
-
-int check_overlap(const void *dest, const void *src, size_t len)
-{
-    unsigned char *s;
-    unsigned char *s_last;
-    unsigned char *d;
-    
-    s = (unsigned char *) src;
-    s_last = (unsigned char *) (src + len - 1);
-    d = (unsigned char *) dest;
-    size_t  i;
-
-    i = 0;
-    while (i < len)
-    {
-        if ((s == &d[i]) || (s_last == &d[i]))
-            return (1);
-        i++;
-    }
-    return (0);
-}
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-    void    *buff;
+	char	*tmp_dest;
+	char	*tmp_src;
+	size_t	i;
 
-    if(!src && !dest)
-        return (NULL);
-    if(n == 0)
-        return (dest);
-    if(!check_overlap(dest, src, n))
-    {
-        ft_memcpy(dest, src, n);
-        return (dest);
-    }
-    buff = malloc(sizeof(char) * n);
-    if (!buff)
-        return (NULL);
-    ft_memcpy(buff, src, n);
-    ft_memcpy(dest, buff, n);
-    free(buff);
-    buff = NULL;
-    return (dest);
+	i = -1;
+	if (!src && !dest)
+		return (NULL);
+	if (!n)
+		return (dest);
+	tmp_dest = (char *)dest;
+	tmp_src = (char *)src;
+	if (dest > src)
+		while (n--)
+			*(tmp_dest + n) = *(tmp_src + n);
+	else if (dest < src)
+		while (++i < n)
+			*(tmp_dest + i) = *(tmp_src + i);
+	return (dest);
 }
