@@ -75,6 +75,11 @@ all:		$(NAME)
 
 bonus:		$(OBJS) $(OBJS_BONUS)
 			ar rcs $(NAME) $(OBJS) $(OBJS_BONUS)
+
+so:
+			$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRCS)
+			gcc -nostartfiles -shared -o libft.so $(OBJS)
+
 clean:
 			rm -rf $(OBJS) $(OBJS_BONUS)
 
