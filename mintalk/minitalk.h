@@ -1,16 +1,24 @@
-#ifndef COMMON_H
-#define COMMON_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 14:42:25 by dtoure            #+#    #+#             */
+/*   Updated: 2022/11/16 14:42:25 by dtoure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#define SA struct sigaction
-#define BUFFER_SIZE 49
-#include <stdlib.h>
-#include <signal.h>
-#include <sys/types.h>
-#include <unistd.h>
+#ifndef MINITALK_H
+# define MINITALK_H
 
-void ft_putchar_fd(char c, int fd);
-void ft_putnbr_fd(int n, int fd);
-void ft_putstr_fd(char *s, int fd);
-int ft_atoi(const char *nptr);
-size_t ft_strlen(char *str);
+# define BUFFER_SIZE 5
+# include <stdlib.h>
+# include <signal.h>
+# include <sys/types.h>
+# include <unistd.h>
+# include "./libft/libft.h"
+
+void	is_process_running(pid_t pid, char *str);
 #endif

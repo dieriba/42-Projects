@@ -1,61 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 14:50:30 by dtoure            #+#    #+#             */
+/*   Updated: 2022/11/16 14:50:30 by dtoure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
-int ft_atoi(const char *nptr)
+void	is_process_running(pid_t pid, char *msg)
 {
-    int i;
-    int sign;
-    int res;
-
-    i = 0;
-    sign = 1;
-    res = 0;
-    while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
-        i++;
-    if (nptr[i] == '+' || nptr[i] == '-')
-    {
-        if (nptr[i] == '-')
-            sign = -1;
-        i++;
-    }
-    while (nptr[i] >= '0' && nptr[i] <= '9')
-    {
-        res = res * 10 + (nptr[i] - '0');
-        i++;
-    }
-    return (res * sign);
-}
-
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
-
-void	ft_putnbr_fd(int n, int fd)
-{
-	long int	nbr;
-
-	nbr = n;
-	if (n < 0)
+	if (kill(pid, 0) < 0)
 	{
-		nbr *= -1;
-		ft_putchar_fd('-', fd);
+		ft_putstr_fd(("An error occured during the process, exiting...\n"), 2);
+		if (msg)
+			free(msg);
+		exit(EXIT_FAILURE);
 	}
-	if (nbr > 9)
-		ft_putnbr_fd((nbr / 10), fd);
-	ft_putchar_fd((nbr % 10) + '0', fd);
-}
-
-size_t ft_strlen(char *str)
-{
-    size_t i;
-
-    i = 0;
-    while (str[i])
-        i++;
-    return (i);
-}
-
-void ft_putstr_fd(char *s, int fd)
-{
-    write(fd, s, ft_strlen(s));
 }
