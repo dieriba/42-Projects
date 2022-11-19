@@ -18,16 +18,19 @@
 # include <sys/wait.h>
 # include <stdio.h>
 # include "libft/libft.h"
+typedef struct t_cmd t_cmd;
+typedef struct t_data
+{
+	char	**files;
+	t_cmd	**cmd_data;
+	int		pipe[2];
+}	t_data;
 
 typedef struct t_cmd
 {
 	char	*cmd;
-	char	*path;
 	char	**args;
 	char	**paths;
-	int		pipe[2];
-	int		rel_path;
-	int		abs_path;
-	int		cmd_name;
-}	t_cmd;
+	char	*path;
+} t_cmd;
 #endif

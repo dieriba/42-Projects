@@ -45,28 +45,16 @@ int free_all(char **tab, char *tmp, int idx_err)
     
 }
 
-int     init_path(t_cmd *paths, )
-
-
-
-
-void    check(t_cmd *info, char **argv, char**envp)
+void    check_empty(int argc, char **argv)
 {
-    size_t i = -1;
-    
-    info -> cmd = ft_strjoin("/", argv[1]);
-    if (!cmd)
-            // CREATE CUSTOM ERROR FUNCTION
-    info -> path = find_path(envp);
-    if (!path)
-        //create custom fuction for free and return erorr
-    info -> paths = ft_split(info -> path + 5, ':');
-    while (tab[++i])
+    size_t  i;
+
+    i = 0;
+    while (++i < argc)
     {
-        tmp = tab[i];
-        tab[i] = ft_strjoin(tab[i], cmd);
-        if (!tab[i])
-            return (free_all(tab, tmp, i));
-        free(tmp);
-    }   
+        if (!argv[i][0])
+            return (1);
+    }
+    return (0);
 }
+    info -> cmd = ft_strjoin("/", argv[1]);

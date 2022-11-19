@@ -43,7 +43,7 @@ int	is_valid_cmd(char *argv)
 	return (0);
 }
 
-int     check_args(char **argv)
+int     check_err_args(char **argv)
 {
 	int	is_valid;
 
@@ -53,23 +53,23 @@ int     check_args(char **argv)
 		is_valid = is_valid_path_abs(argv[1]);
 		is_valid = is_valid_path_abs(argv[2]);
 	}
-	else if (argv[1][0] != '.' && argv[1][0] != '/')
-		is_valid = is_valid_cmd;
-	else if ()
+	// else if (argv[1][0] != '.' && argv[1][0] != '/')
+	// 	is_valid = is_valid_cmd();
 		
 	return (is_valid);
 }
 
+void	init_struct(t_data *info, char **argv)
+{
+	
+}
+
 int main(int argc, char *argv[], char *envp[])
 {
-	t_cmd	info;
-	ft_memset(&info, 0, sizeof(t_cmd));
-    // check(info, argv, envp);
+	t_data	info;
 
-    if (check_args(argv))
-		printf("Invalid Path");
-	else
-		printf("Valid path");
-    // while (tab[++i])
-    //     execve(tab[i], arg, envp);
+	if (argc != 5 || check_empty(argc, argv))
+		//return (function to exit)
+	ft_memset(&info, 0, sizeof(t_cmd));
+	init_struct(&info, argv);
 }
