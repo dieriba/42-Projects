@@ -1,52 +1,82 @@
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/wait.h>
-int write_to_pipe(int fd[])
-{
-    close(fd[0]);
-    int i = -1;
-    int n = 20;
-    int *new_arr = malloc(sizeof(int) * n);
-    if (!new_arr)
-        return (2);
-    while (++i < n)
-        new_arr[i] = i;
-    if (write(fd[1], &n, sizeof(int)) < 0)
-        return (3);
-    if (write(fd[1], new_arr, (sizeof(int) * n)) < 0)
-        return (4);
-    
-    close(fd[1]);
-}
+#include "pipex.h"
 
-int read_from_pipe(int fd[])
+
+
+
+
+int    check(char *env, char *to_check, size_t size)
 {
-    close(fd[1]);
-    int i;
+    size_t  i;
 
     i = -1;
-    close(fd[1]);
-    int n;
-    int a[20];
-    read(fd[0], &n, sizeof(int));
-    read(fd[0], &a, sizeof(int) * 20);
-    close(fd[0]);
-    while (++i < n)
-        printf("%d\n", a[i]);
-    wait(NULL);
+    while ((to_check[++i] && env[++i]) && i < size && (to_check[i] == env[i]))
+        ;
+    if(env[i] == '=' && !to_check[i])
+        return (1);
+    return (0);
 }
 
-int main(int argc, char **argv, char **envp)
+char    *find_path(char *envp[])
 {
-    int id;
-    int fd[2];
+    size_t  i;
 
-    if (pipe(fd) < 0)
+    if (!envp)
+        return (NULL);
+    i = -1;
+    while (envp[++i])
+    {
+        if (envp[i][0] != 'P')
+            continue;
+        if (check(envp[i],"PATH", 4))
+            return (envp[i]);
+    }
+    return (NULL);
+}
+
+
+int free_all(char **tab, char *tmp, int idx_err)
+{
+    size_t  i;
+
+    i = -1;
+    while (tab[++i])
+    {
+        if (i == idx_err)
+            continue;
+        free(tab[i]);
+    }
+    free(tmp);
+    free(tab);
+    
+}
+int main(int argc, char *argv[], char *envp[])
+{
+    // if (argc != 5)
+    //     return (1);
+    char    *path;
+    char    **tab;
+    char    *tmp;
+    char    *cmd;
+
+    cmd = ft_strjoin("/", argv[1]);
+    if (!cmd)
         return (1);
-    id = fork();
-    if (!id)
-        write_to_pipe(fd);
-    else
-        read_from_pipe(fd);
+
+    path = find_path(envp);
+    if (!path)
+        return (1);
+    tab = ft_split(path + 5, ':');
+    size_t i = -1;
+    while (tab[++i])
+    {
+        tmp = tab[i];
+        tab[i] = ft_strjoin(tab[i], cmd);
+        if (!tab[i])
+            return (free_all(tab, tmp, i));
+        free(tmp);
+    }
+    i= -1;
+    char **arg;
+    while (tab[++i])
+        execve(tab[i], arg, envp);
 }
