@@ -1,75 +1,38 @@
 #include "pipex.h"
 
-
-
-
-
-// int	init(t_info	*info)
+// int	is_valid_cmd(char *argv)
 // {
-	
+
 // }
 
-int		is_valid_path_abs(char *argv)
-{
-	size_t  i;
-    int     find;
-
-    find = 0;
-    i = 1;
-    while (argv[i])
-    {
-        while (argv[++i] && argv[i] != '/')
-            if (ft_isalnum(argv[i]) && argv[i] != '/' && !find)
-                find = 1;
-        if (!find)
-            return (1);
-        find = 0;
-    }
-    if (argv[--i] == '/')
-            return (1);
-	return (0);
-}
-
-int	is_valid_cmd(char *argv)
+void	print_tab(char **tab)
 {
 	size_t	i;
-
-	i = -1;
-	while (argv[++i])
-	{
-		if (!ft_isalnum(argv[i]))
-			return (1);
-	}
-	return (0);
-}
-
-int     check_err_args(char **argv)
-{
-	int	is_valid;
-
-	is_valid = 0;
-    if (argv[1][0] && argv[1][0] == '/')
-	{
-		is_valid = is_valid_path_abs(argv[1]);
-		is_valid = is_valid_path_abs(argv[2]);
-	}
-	// else if (argv[1][0] != '.' && argv[1][0] != '/')
-	// 	is_valid = is_valid_cmd();
-		
-	return (is_valid);
-}
-
-void	init_struct(t_data *info, char **argv)
-{
 	
+	if (!tab)
+	{
+		ft_printf("No tab\n");
+		return ;
+	}
+	i = -1;
+	while(tab[++i])
+		ft_printf("%s ", tab[i]);
 }
+
 
 int main(int argc, char *argv[], char *envp[])
 {
 	t_data	info;
 
 	if (argc != 5 || check_empty(argc, argv))
-		//return (function to exit)
-	ft_memset(&info, 0, sizeof(t_cmd));
-	init_struct(&info, argv);
+	{
+		ft_printf("Usage : %s 'file1' 'cmd1' 'cmd2' 'file2'\n", argv[0]);
+		exit(EXIT_FAILURE);
+	}
+	ft_memset(&info, 0, sizeof(t_data));
+	info.files = NULL;
+    info.cmd_data = NULL;
+	init_cmd(&info, argv, envp);
+	// print_struct(&info);
+	// print_err_and_exit("END", &info);
 }

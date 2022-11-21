@@ -7,6 +7,7 @@ SRCS 		=	ft_atoi.c \
 				ft_isalnum.c \
 				ft_isalpha.c \
 				ft_isascii.c \
+				ft_free_tab.c\
 				ft_isdigit.c \
 				ft_isprint.c \
 				ft_calloc.c \
@@ -45,6 +46,8 @@ SRCS 		=	ft_atoi.c \
 				ft_substr.c \
 				ft_tolower.c \
 				ft_toupper.c \
+				ft_free_tab.c \
+				ft_tablen.c
 
 BONUS		=	ft_lstnew.c \
 				ft_lstadd_front.c \
@@ -69,16 +72,14 @@ CFLAGS		=	-Wall -Wextra -Werror
 			$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME):	$(OBJS)
+			make -C ./ft_printf
+			cp ./ft_printf/libprintf.a ../
 			ar -rcs $(NAME) $(OBJS)
-
+			
 all:		$(NAME)
 
 bonus:		$(OBJS) $(OBJS_BONUS)
 			ar rcs $(NAME) $(OBJS) $(OBJS_BONUS)
-
-so:
-			$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRCS)
-			gcc -nostartfiles -shared -o libft.so $(OBJS)
 
 clean:
 			rm -rf $(OBJS) $(OBJS_BONUS)

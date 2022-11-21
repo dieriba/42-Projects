@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "pipex.h"
 
 int    check(char *env, char *to_check, size_t size)
 {
@@ -17,7 +17,7 @@ char    *find_path(char *envp[])
     size_t  i;
 
     if (!envp)
-        return (NULL);
+        return (0);
     i = -1;
     while (envp[++i])
     {
@@ -26,28 +26,12 @@ char    *find_path(char *envp[])
         if (check(envp[i],"PATH", 4))
             return (envp[i]);
     }
-    return (NULL);
+    return (0);
 }
 
-int free_all(char **tab, char *tmp, int idx_err)
+int    check_empty(int argc, char **argv)
 {
-    size_t  i;
-
-    i = -1;
-    while (tab[++i])
-    {
-        if (i == idx_err)
-            continue;
-        free(tab[i]);
-    }
-    free(tmp);
-    free(tab);
-    
-}
-
-void    check_empty(int argc, char **argv)
-{
-    size_t  i;
+    int  i;
 
     i = 0;
     while (++i < argc)
@@ -57,4 +41,3 @@ void    check_empty(int argc, char **argv)
     }
     return (0);
 }
-    info -> cmd = ft_strjoin("/", argv[1]);

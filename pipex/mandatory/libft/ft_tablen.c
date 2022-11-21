@@ -1,4 +1,4 @@
-#include "libft.ft"
+#include "libft.h"
 
 int ft_tab_len(char **tab)
 {
