@@ -6,11 +6,15 @@ void    init_files(t_data *info, char *files_one, char *files_two)
     size_t  i;
 
     i = -1;
-    files = malloc(sizeof(char*) * 3);
+    files = ft_calloc(sizeof(char*), 3);
     if (!files)
         print_err_and_exit("Failled to allocate memory", info);
     files[0] = ft_strdup(files_one);
+    if (!files[0])
+        print_err_and_exit("Failled to allocate memory", info);
     files[1] = ft_strdup(files_two);
+    if (!files[1])
+        print_err_and_exit("Failled to allocate memory", info);
     info -> files = files;
 }
 
@@ -18,27 +22,15 @@ void    fill_struct (t_cmd *cmds, char *argv)
 {
     char    **tab;
     int     len;
-    int  i;
 
-    i = 0;
     tab = ft_split(argv, ' ');
     if (!tab)
         print_err_and_exit("Failled to allocate memory", cmds -> info);
     cmds -> cmd = tab[0];
+    cmds -> base_cmd = tab[0];
     len = ft_tab_len(tab);
-    cmds -> args = NULL;
+    cmds -> args = tab;
     cmds -> paths = NULL;
-    if (len == 1)
-    {   
-         free(tab[1]); 
-         free(tab);
-    }
-    cmds -> args = malloc((sizeof(char *) * len + 1));
-    if (!cmds -> args)
-        print_err_and_exit("Failled to allocate memory", cmds -> info);
-    while (++i <= len)
-        cmds -> args[i - 1] = tab[i];
-    free(tab);
 }
 
 

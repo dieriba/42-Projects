@@ -1,4 +1,4 @@
-SRCS		= pipex.c init.c check.c errors_handling.c path.c
+SRCS		=	./srcs/pipex.c ./srcs/init.c ./srcs/check.c ./srcs/errors_handling.c ./srcs/path.c ./srcs/pipe.c
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -25,7 +25,7 @@ clean:
 			rm -rf *.d
 			
 fclean:		clean
-			rm -rf $(PIPEX) libft.a libprintf.a
+			rm -rf $(PIPEX) ./lib/libft.a ./lib/libprintf.a
 
 re:			fclean all
 
