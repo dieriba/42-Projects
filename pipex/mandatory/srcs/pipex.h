@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:11:12 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/23 00:05:09 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/23 13:51:34 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-typedef struct	t_cmd t_cmd;
-typedef struct	t_data t_data;
-typedef struct	t_data 
+typedef struct t_cmd	t_cmd;
+typedef struct t_data	t_data;
+typedef struct t_data
 {
 	char	**files;
 	t_cmd	**cmd_data;
@@ -41,11 +41,11 @@ typedef struct t_cmd
 	char	*path;
 	t_data	*info;
 	int		no_path;
-} t_cmd;
+}	t_cmd;
 
 void	free_all(t_data *to_free, int code);
 void	create_pipe(t_data *data);
-void	print_err_and_exit(char *str, t_data* info);
+void	print_err_and_exit(char *str, t_data *info);
 void	init_cmd(t_data *info, char **argv, char **envp);
 void	set_path_type(t_cmd **cmds);
 void	set_path(t_cmd **cmds);

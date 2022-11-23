@@ -72,8 +72,6 @@ CFLAGS		=	-Wall -Wextra -Werror
 			$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME):	$(OBJS)
-			make -C ./ft_printf
-			cp ./ft_printf/libprintf.a ../
 			ar -rcs $(NAME) $(OBJS)
 			
 all:		$(NAME)

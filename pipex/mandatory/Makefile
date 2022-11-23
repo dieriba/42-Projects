@@ -16,13 +16,15 @@ all:		$(PIPEX)
 			$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(PIPEX):	${OBJS}
+			make -C ./libft/ft_printf
+			cp ./libft/ft_printf/libprintf.a ./lib
 			make -C ./libft
-			cp ./libft/libft.a .
-			$(CC) $(CFLAGS) ${OBJS} -g3 -L. -lft -lprintf -o $(PIPEX)
+			cp ./libft/libft.a ./lib
+			$(CC) $(CFLAGS) ${OBJS} -g3 -L./lib -lft -lprintf -o $(PIPEX)
 
 clean:
-			rm -rf *.o
-			rm -rf *.d
+			rm -rf ./srcs/*.o
+			rm -rf ./srcs/*.d
 			
 fclean:		clean
 			rm -rf $(PIPEX) ./lib/libft.a ./lib/libprintf.a
