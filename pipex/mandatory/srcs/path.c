@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:41:48 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/23 15:38:37 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/23 19:33:29 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	create_path(t_cmd *cmds)
 
 	cmds -> paths = ft_split(cmds -> path + 5, ':');
 	if (!cmds -> paths)
-		print_err_and_exit("Failled to allocate memory", cmds -> info);
+		print_err_and_exit("Failled to allocate memory", cmds -> info, 0);
 	tab = ft_dup_tab(cmds -> paths, cmds -> cmd);
 	if (!tab)
-		print_err_and_exit("Failled to allocate memory", cmds -> info);
+		print_err_and_exit("Failled to allocate memory", cmds -> info, 0);
 	cmds -> paths = tab;
 }
 
@@ -52,7 +52,7 @@ void	set_path_type(t_cmd **cmds)
 			cmds[i]-> cmd = ft_strjoin("/", cmds[i]-> cmd);
 			if (!cmds[i]-> cmd)
 				print_err_and_exit("Failled to allocate memory",
-					cmds[0]-> info);
+					cmds[0]-> info, 0);
 		}
 	}		
 }
