@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:34:34 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/23 15:39:40 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/23 15:50:53 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,13 @@ void	set_cmds_data(t_data *info, t_cmd **cmds, char *path)
 	}
 }
 
-void	set_cmd_to_null(t_cmd *cmd)
+void	set_cmd(t_cmd *cmd, char *envp[])
 {
 	cmd -> args = NULL;
 	cmd -> no_path = 0;
 	cmd -> cmd = NULL;
 	cmd -> paths = NULL;
+	cmd -> envp = envp;
 }
 
 void	init_cmd(t_data *data, char **argv, char *envp[])
@@ -77,7 +78,7 @@ void	init_cmd(t_data *data, char **argv, char *envp[])
 		cmds[i] = malloc(sizeof(t_cmd));
 		if (!cmds[i])
 			print_err_and_exit("Failled to allocate memory", data);
-		set_cmd_to_null(cmds[i]);
+		set_cmd(cmds[i], envp);
 	}
 	init_files(data, argv[1], argv[4]);
 	set_cmds_data(data, data -> cmd_data, find_path(envp));

@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:11:12 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/23 15:23:37 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/23 15:50:31 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ typedef struct t_cmd	t_cmd;
 typedef struct t_data	t_data;
 typedef struct t_data
 {
-	char	**files;
 	t_cmd	**cmd_data;
+	char	**files;
 }	t_data;
 
 typedef struct t_cmd
 {
+	t_data	*info;
+	int		no_path;
 	char	*cmd;
-	char	*envp;
+	char	**envp;
 	char	**args;
 	char	**paths;
 	char	*path;
-	t_data	*info;
-	int		no_path;
 }	t_cmd;
 
 void	free_all(t_data *to_free, int code);

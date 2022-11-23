@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:44:54 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/23 15:38:00 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/23 15:50:28 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	run_cmd(t_cmd *cmd)
 		while (cmd -> paths[++i])
 		{
 			if (access(cmd -> paths[i], F_OK | X_OK) != -1)
-				execve(cmd -> paths[i], cmd -> args, NULL);
+				execve(cmd -> paths[i], cmd -> args, cmd -> envp);
 		}
 	}
 	else
-		execve(cmd -> cmd, cmd -> args, NULL);
+		execve(cmd -> cmd, cmd -> args, cmd -> envp);
 	perror("Error");
 }
 
