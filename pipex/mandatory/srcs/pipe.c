@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:44:54 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/23 22:31:14 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/23 23:57:06 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	run_cmd(t_cmd *cmd)
 void	start(t_cmd *cmd, int pipes[2], char *files)
 {
 	int	fd;
+
 	if (access(files, F_OK | R_OK) < 0)
 		print_err_and_exit("Error", cmd -> info, 1);
 	fd = open(files, O_RDONLY, 0666);
@@ -92,8 +93,6 @@ void	create_pipe(t_data *data)
 		start(data -> cmd_data[0], data -> pipes, data -> files[0]);
 	else
 	{
-		// if (waitpid(pid_ret, NULL, 0) < 0)
-		// 	print_err_and_exit("Could not for the process", data, 1);
 		pid_ret = fork();
 		if (pid_ret < 0)
 			print_err_and_exit("Could not for the process", data, 1);
@@ -101,6 +100,7 @@ void	create_pipe(t_data *data)
 			end(data -> cmd_data[1], data -> pipes, data -> files[1]);
 		if (close(data -> pipes[1]) < 0 || close(data -> pipes[0]) < 0)
 			print_err_and_exit("Could not for the process", data, 1);
-		while(wait(NULL) > 0);
+		while (wait(NULL) > 0)
+			;
 	}
 }
