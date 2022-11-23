@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:44:54 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/23 15:50:28 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/23 16:37:18 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,11 @@ void	start(t_cmd *cmd, int pipes[2], char *files)
 		exit_error("Error");
 	if (dup2(fd, STDIN_FILENO) < 0)
 		exit_error("Error");
-	close(fd);
+	if (close(fd) < 0)
+		exit_error("Error");
 	if (dup2(pipes[1], STDOUT_FILENO) < 0)
 		exit_error("Error");
-	if (close(pipes[1]) < 0)
-		exit_error("Error");
-	if (close(pipes[0]) < 0)
+	if (close(pipes[1]) < 0 || close(pipes[0]) < 0)
 		exit_error("Error");
 	run_cmd(cmd);
 }
@@ -68,9 +67,7 @@ void	end(t_cmd *cmd, int *pipes, char *files)
 		exit_error("Error");
 	if (dup2(pipes[0], STDIN_FILENO) < 0)
 		exit_error("Error");
-	if (close(pipes[0]) < 0)
-		exit_error("Error");
-	if (close(pipes[1]) < 0)
+	if (close(pipes[0]) < 0 || close(pipes[1]) < 0)
 		exit_error("Error");
 	if (dup2(fd, STDOUT_FILENO) < 0)
 		exit_error("Error");
@@ -101,5 +98,7 @@ void	create_pipe(t_data *data)
 			print_err_and_exit("Could not for the process", data);
 		if (pid_ret == 0)
 			end(data -> cmd_data[1], pipes, data -> files[1]);
+		if (close(pipes[0]) < 0 || close(pipes[1]) < 0)
+			exit_error("Error");
 	}
 }
