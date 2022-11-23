@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:11:12 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/23 13:51:34 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/23 15:23:37 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct t_cmd
 {
 	char	*cmd;
 	char	*envp;
-	char	*base_cmd;
 	char	**args;
 	char	**paths;
 	char	*path;

@@ -12,6 +12,7 @@ SRCS 		=	ft_atoi.c \
 				ft_isprint.c \
 				ft_calloc.c \
 				ft_lstadd_back.c \
+				ft_dup_tab.c \
 				ft_lstadd_front.c \
 				ft_lstclear.c \
 				ft_lstdelone.c \

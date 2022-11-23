@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:44:54 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/23 13:49:02 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/23 15:38:00 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,13 @@ void	run_cmd(t_cmd *cmd)
 
 	i = -1;
 	if (cmd -> no_path)
+	{
 		while (cmd -> paths[++i])
+		{
 			if (access(cmd -> paths[i], F_OK | X_OK) != -1)
 				execve(cmd -> paths[i], cmd -> args, NULL);
+		}
+	}
 	else
 		execve(cmd -> cmd, cmd -> args, NULL);
 	perror("Error");
@@ -41,11 +45,15 @@ void	start(t_cmd *cmd, int pipes[2], char *files)
 	fd = open(files, O_RDONLY, 0666);
 	if (fd < 0)
 		exit_error("Error");
-	dup2(fd, STDIN_FILENO);
+	if (dup2(fd, STDIN_FILENO) < 0)
+		exit_error("Error");
 	close(fd);
-	dup2(pipes[1], STDOUT_FILENO);
-	close(pipes[1]);
-	close(pipes[0]);
+	if (dup2(pipes[1], STDOUT_FILENO) < 0)
+		exit_error("Error");
+	if (close(pipes[1]) < 0)
+		exit_error("Error");
+	if (close(pipes[0]) < 0)
+		exit_error("Error");
 	run_cmd(cmd);
 }
 
@@ -58,10 +66,14 @@ void	end(t_cmd *cmd, int *pipes, char *files)
 		exit_error("Error");
 	if (fd < 0)
 		exit_error("Error");
-	dup2(pipes[0], STDIN_FILENO);
-	close(pipes[0]);
-	close(pipes[1]);
-	dup2(fd, STDOUT_FILENO);
+	if (dup2(pipes[0], STDIN_FILENO) < 0)
+		exit_error("Error");
+	if (close(pipes[0]) < 0)
+		exit_error("Error");
+	if (close(pipes[1]) < 0)
+		exit_error("Error");
+	if (dup2(fd, STDOUT_FILENO) < 0)
+		exit_error("Error");
 	close(fd);
 	run_cmd(cmd);
 }
@@ -82,7 +94,8 @@ void	create_pipe(t_data *data)
 		start(data -> cmd_data[0], pipes, data -> files[0]);
 	else
 	{
-		waitpid(pid_ret, NULL, 0);
+		if (waitpid(pid_ret, NULL, 0) < 0)
+			exit_error("Error");
 		pid_ret = fork();
 		if (pid_ret < 0)
 			print_err_and_exit("Could not for the process", data);

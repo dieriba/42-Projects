@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:41:48 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/23 13:44:47 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/23 15:38:37 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,15 @@
 
 void	create_path(t_cmd *cmds)
 {
-	size_t	i;
-	char	*tmp;
+	char	**tab;
 
-	i = -1;
 	cmds -> paths = ft_split(cmds -> path + 5, ':');
 	if (!cmds -> paths)
 		print_err_and_exit("Failled to allocate memory", cmds -> info);
-	while (cmds -> paths[++i])
-	{
-		tmp = cmds -> paths[i];
-		cmds -> paths[i] = ft_strjoin(cmds -> paths[i], cmds -> cmd);
-		if (!cmds -> paths[i])
-			print_err_and_exit("Failled to allocate memory", cmds -> info);
-		free(tmp);
-	}
+	tab = ft_dup_tab(cmds -> paths, cmds -> cmd);
+	if (!tab)
+		print_err_and_exit("Failled to allocate memory", cmds -> info);
+	cmds -> paths = tab;
 }
 
 void	set_path(t_cmd **cmds)
@@ -40,8 +34,6 @@ void	set_path(t_cmd **cmds)
 	{
 		if (cmds[i]-> no_path)
 			create_path(cmds[i]);
-		else
-			cmds[i]-> paths = 0;
 	}
 }
 
@@ -62,7 +54,5 @@ void	set_path_type(t_cmd **cmds)
 				print_err_and_exit("Failled to allocate memory",
 					cmds[0]-> info);
 		}
-		else
-			cmds[i]-> no_path = 0;
 	}		
 }

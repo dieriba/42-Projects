@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:34:34 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/23 13:40:58 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/23 15:39:40 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,12 @@ void	init_files(t_data *info, char *files_one, char *files_two)
 void	fill_struct(t_cmd *cmds, char *argv)
 {
 	char	**tab;
-	int		len;
 
 	tab = ft_split(argv, ' ');
 	if (!tab)
 		print_err_and_exit("Failled to allocate memory", cmds -> info);
 	cmds -> cmd = tab[0];
-	cmds -> base_cmd = tab[0];
-	len = ft_tab_len(tab);
 	cmds -> args = tab;
-	cmds -> paths = NULL;
 }
 
 void	set_cmds_data(t_data *info, t_cmd **cmds, char *path)
@@ -57,25 +53,32 @@ void	set_cmds_data(t_data *info, t_cmd **cmds, char *path)
 	}
 }
 
+void	set_cmd_to_null(t_cmd *cmd)
+{
+	cmd -> args = NULL;
+	cmd -> no_path = 0;
+	cmd -> cmd = NULL;
+	cmd -> paths = NULL;
+}
+
 void	init_cmd(t_data *data, char **argv, char *envp[])
 {
 	t_cmd	**cmds;
 	size_t	i;
 
+	data -> files = NULL;
 	i = -1;
 	cmds = ft_calloc(sizeof(t_cmd *), 3);
 	if (!cmds)
-	{
-		perror("Failled To Allocate Memory");
-		exit(EXIT_FAILURE);
-	}
+		print_err_and_exit("Failled to allocate memory", data);
+	data -> cmd_data = cmds;
 	while (++i < 2)
 	{
 		cmds[i] = malloc(sizeof(t_cmd));
 		if (!cmds[i])
 			print_err_and_exit("Failled to allocate memory", data);
+		set_cmd_to_null(cmds[i]);
 	}
-	data -> cmd_data = cmds;
 	init_files(data, argv[1], argv[4]);
 	set_cmds_data(data, data -> cmd_data, find_path(envp));
 	fill_struct(cmds[0], argv[2]);

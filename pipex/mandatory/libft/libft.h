@@ -27,6 +27,9 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 
+char	**ft_free_tab(char **tab);
+char	**ft_dup_tab(char **to_copy, char *to_join);
+
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
@@ -53,7 +56,6 @@ void	ft_putnbr_fd(int n, int fd);
 void	*ft_memset(void *s, int c, size_t n);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
-void	free_tab(char **tab);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 
 typedef struct s_list
