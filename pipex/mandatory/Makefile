@@ -13,14 +13,14 @@ PIPEX		=	pipex
 all:		$(PIPEX)
 
 .c.o :	
-			$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+			$(CC) -g3 $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(PIPEX):	${OBJS}
 			make -C ./libft/ft_printf
 			cp ./libft/ft_printf/libprintf.a ./lib
 			make -C ./libft
 			cp ./libft/libft.a ./lib
-			$(CC) $(CFLAGS) ${OBJS} -g3 -L./lib -lft -lprintf -o $(PIPEX)
+			$(CC) -g3 $(CFLAGS) ${OBJS} -L./lib -lft -lprintf -o $(PIPEX)
 
 clean:
 			rm -rf ./srcs/*.o

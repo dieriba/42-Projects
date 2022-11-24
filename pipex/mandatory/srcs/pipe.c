@@ -6,17 +6,11 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:44:54 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/23 23:57:06 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/24 17:06:58 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	exit_error(char *str)
-{
-	perror(str);
-	exit(1);
-}
 
 void	run_cmd(t_cmd *cmd)
 {
