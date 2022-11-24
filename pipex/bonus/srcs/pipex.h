@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:11:12 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/24 12:36:00 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/24 19:17:55 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct t_cmd	t_cmd;
 typedef struct t_data	t_data;
 typedef struct t_data
 {
+	int		here_doc;
 	int		num_cmds;
 	t_cmd	**cmd_data;
 	char	**files;

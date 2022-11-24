@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:44:54 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/24 18:18:41 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/24 18:51:03 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	end(t_cmd *cmd, int *pipes, char *files)
 	if (dup2(pipes[0], STDIN_FILENO) < 0)
 		print_err_and_exit("Error", cmd -> info, 1);
 	if (close(pipes[1]) < 0 || close(pipes[0]) < 0)
-		print_err_and_exit("Could not for the process", cmd -> info, 1);
+		print_err_and_exit("Error", cmd -> info, 1);
 	if (dup2(fd, STDOUT_FILENO) < 0)
 		print_err_and_exit("Error", cmd -> info, 1);
 	if (close(fd) < 0)
@@ -78,22 +78,22 @@ void	create_pipe(t_data *data)
 
 	files = data -> files;
 	if (pipe(data -> pipes) < 0)
-		print_err_and_exit("Could not set the pipes", data, 1);
+		print_err_and_exit("Error", data, 1);
 	data -> init_pipes = 1;
 	pid_ret = fork();
 	if (pid_ret < 0)
-		print_err_and_exit("Could not for the process", data, 1);
+		print_err_and_exit("Error", data, 1);
 	if (pid_ret == 0)
 		start(data -> cmd_data[0], data -> pipes, data -> files[0]);
 	else
 	{
 		pid_ret = fork();
 		if (pid_ret < 0)
-			print_err_and_exit("Could not for the process", data, 1);
+			print_err_and_exit("Error", data, 1);
 		if (pid_ret == 0)
 			end(data -> cmd_data[1], data -> pipes, data -> files[1]);
 		if (close(data -> pipes[1]) < 0 || close(data -> pipes[0]) < 0)
-			print_err_and_exit("Could not for the process", data, 1);
+			print_err_and_exit("Error", data, 1);
 		while (wait(NULL) > 0)
 			;
 	}

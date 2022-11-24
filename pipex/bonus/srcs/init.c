@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:34:34 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/24 17:15:38 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/24 20:51:23 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void	fill_struct(t_cmd **cmds, char **argv)
 
 void	set_cmds_data(t_data *info, t_cmd **cmds, char *path)
 {
-	size_t	i;
+	int	i;
 
 	i = -1;
-	while (++i < 2)
+	while (++i < info -> num_cmds)
 	{
 		cmds[i]-> info = info;
 		cmds[i]-> path = path;

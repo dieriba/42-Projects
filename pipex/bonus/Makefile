@@ -13,7 +13,7 @@ PIPEX		=	pipex
 all:		$(PIPEX)
 
 .c.o :	
-			$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+			$(CC) -g3 $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(PIPEX):	${OBJS}
 			make -C ./libft/ft_printf
