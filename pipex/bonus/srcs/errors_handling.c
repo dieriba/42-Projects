@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:31:37 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/23 15:38:14 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/24 15:34:54 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,12 @@ void	free_all(t_data *to_free, int code)
 	exit(code);
 }
 
-void	print_err_and_exit(char *str, t_data *info)
+void	print_err_and_exit(char *str, t_data *info, int type)
 {
+	if (type)
+		perror("Error");
+	else
+		ft_putstr_fd("Error", 2);
 	ft_putstr_fd(str, 2);
 	free_all(info, EXIT_FAILURE);
 }

@@ -12,6 +12,29 @@
 
 #include "pipex.h"
 
+void print_tab(char **tab)
+{
+	size_t	i;
+	if (!tab)
+		return ;
+	i = -1;
+	while (tab[++i])
+		ft_printf("args [%i] %s\n", i + 1, tab[i]);
+}
+
+void	print_cmd(t_cmd **cmds)
+{
+	size_t	i;
+
+	i = -1;
+	while (cmds[++i])
+	{
+		ft_printf("%s \n", cmds[i]-> cmd);
+		print_tab(cmds[i]->args);
+		print_tab(cmds[i]->paths);
+	}
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	info;
@@ -24,5 +47,5 @@ int	main(int argc, char *argv[], char *envp[])
 	ft_memset(&info, 0, sizeof(t_data));
 	init_cmd(&info, argv, argc, envp);
 	create_pipe(&info);
-	free_all(&info, EXIT_SUCCESS);
+	// free_all(&info, EXIT_SUCCESS);
 }

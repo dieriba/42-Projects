@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:34:34 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/24 12:33:51 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/24 15:58:16 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,16 @@ void	set_cmd(t_cmd *cmd, char *envp[])
 void	init_cmd(t_data *info, char **argv, int argc, char **envp)
 {
 	t_cmd	**cmds;
-	size_t	i;
+	int	i;
 
 	info -> files = NULL;
-	info -> num_cmds = argc - 4;
+	info -> num_cmds = argc - 3;
 	i = -1;
-	cmds = ft_calloc(sizeof(t_cmd *), info -> num_cmds + 2);
+	cmds = ft_calloc(sizeof(t_cmd *), info -> num_cmds + 1);
 	if (!cmds)
 		print_err_and_exit("Failled to allocate memory", info, 0);
 	info -> cmd_data = cmds;
-	while (++i < info -> num_cmds + 1)
+	while (++i < info -> num_cmds)
 	{
 		cmds[i] = malloc(sizeof(t_cmd));
 		if (!cmds[i])
@@ -90,5 +90,5 @@ void	init_cmd(t_data *info, char **argv, int argc, char **envp)
 	set_cmds_data(info, info -> cmd_data, find_path(envp));
 	fill_struct(cmds, argv);
 	set_path_type(cmds);
-	set_path(cmds);
+	// set_path(cmds);
 }
