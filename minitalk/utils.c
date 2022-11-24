@@ -24,14 +24,14 @@ void	is_process_running(pid_t pid, char *msg)
 	}
 }
 
-int		is_valid_pid(char *pid)
+int	is_valid_pid(char *pid)
 {
 	size_t	i;
 
 	i = -1;
 	while (pid[++i])
 	{
-		if(!ft_isdigit(pid[i]))
+		if (!ft_isdigit(pid[i]))
 			return (0);
 	}
 	return (1);

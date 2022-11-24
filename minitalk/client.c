@@ -24,8 +24,10 @@ void	handle_char(pid_t pid, unsigned char c)
 		g_received = 0;
 		if (kill(pid, 0) < 0)
 		{
-			ft_putstr_fd("An error occured while trying to \
-			reach out for the server.\n", 2);
+			ft_putstr_fd("An error occured while trying to\
+			reach out for the process ID : ", 2);
+			ft_putnbr_fd(pid, 2);
+			ft_putchar_fd('\n', 2);
 			exit(EXIT_FAILURE);
 		}
 		if ((1 << i) & c)

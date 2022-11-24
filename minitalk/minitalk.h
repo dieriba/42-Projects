@@ -19,6 +19,7 @@
 # include <sys/types.h>
 # include <unistd.h>
 # include "./libft/libft.h"
+
 int		is_valid_pid(char *pid);
 void	is_process_running(pid_t pid, char *str);
 #endif
