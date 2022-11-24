@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/pipex",
 
-            "args": ["bonjour", "/usr/bin/cat", "wc", "ds"],
+            "args": ["/dev/stdin", "cats", "ld", "/dev/stdout"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],

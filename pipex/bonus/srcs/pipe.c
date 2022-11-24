@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:44:54 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/24 16:51:15 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/24 17:39:38 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	start(t_cmd *cmd, int pipes[2], char *files)
 		print_err_and_exit("Error", cmd -> info, 1);
 	if (dup2(pipes[1], STDOUT_FILENO) < 0)
 		print_err_and_exit("Error", cmd -> info, 1);
-	if (close(pipes[1]) < 0)
+	if (close(pipes[1]) < 0 )
 		print_err_and_exit("unable not close the pipes", cmd -> info, 0);
 	run_cmd(cmd);
 }
@@ -133,8 +133,8 @@ void	create_pipe(t_data *data)
 			print_err_and_exit("unable to fork the process", data, 1);
 		if (pid_ret == 0)
 			end(data -> cmd_data[1], data -> pipes, data -> prev_pipes, data -> files[1]);
-		// if (close(data -> pipes[1]) < 0 || close(data -> pipes[0]) < 0 || close(data -> prev_pipes) < 0)
-		// 	print_err_and_exit("unable to close the pipes", data, 1);
+		if (close(data -> pipes[1]) < 0 || close(data -> pipes[0]) < 0 || close(data -> prev_pipes) < 0)
+			print_err_and_exit("unable to close the pipes", data, 1);
 		while (wait(NULL) > 0)
 			;
 	}

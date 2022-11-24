@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:34:34 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/24 15:58:16 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/24 17:15:38 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,5 @@ void	init_cmd(t_data *info, char **argv, int argc, char **envp)
 	set_cmds_data(info, info -> cmd_data, find_path(envp));
 	fill_struct(cmds, argv);
 	set_path_type(cmds);
-	// set_path(cmds);
+	set_path(cmds);
 }

@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:31:37 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/24 15:34:54 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/24 17:13:52 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	free_cmd(t_cmd **cmd)
 	i = -1;
 	while (cmd[++i])
 	{
-		if (cmd[i]-> cmd)
+		if (cmd[i]-> cmd && cmd[i]-> no_path)
 			free(cmd[i]-> cmd);
 		if (cmd[i]-> args)
 			ft_free_tab(cmd[i]-> args);
