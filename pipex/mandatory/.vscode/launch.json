@@ -8,9 +8,9 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/a.out",
+            "program": "${workspaceFolder}/pipex",
 
-            "args": ["fivsvsvle", "grep -la -lb", "cat -v -b", "file 2"],
+            "args": ["bonjour", "/usr/bin/cat", "wc", "ds"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],

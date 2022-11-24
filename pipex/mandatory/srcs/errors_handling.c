@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:31:37 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/23 21:46:23 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/24 11:40:51 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	free_cmd(t_cmd **cmd)
 		if (cmd[i]-> cmd)
 			free(cmd[i]-> cmd);
 		if (cmd[i]-> args)
-			ft_free_tab(cmd[i]-> args);
+			cmd[i]-> args = ft_free_tab(cmd[i]-> args);
 		if (cmd[i]-> paths)
-			ft_free_tab(cmd[i]-> paths);
+			cmd[i]-> paths = ft_free_tab(cmd[i]-> paths);
 		free(cmd[i]);
 	}
 	free(cmd);
@@ -59,11 +59,9 @@ void	print_err_and_exit(char *str, t_data *info, int type)
 		perror("Error");
 	if (info -> init_pipes)
 	{
-		if (close(info -> pipes[0]) < 0 || close(info -> pipes[1]) < 0)
-		{
-			print_err_and_exit("Error", info, 1);
-			info -> init_pipes = 0;
-		}
+		close(info -> pipes[0]);
+		close(info -> pipes[1]);
+		info -> init_pipes = 0;
 	}
 	free_all(info, EXIT_FAILURE);
 }
