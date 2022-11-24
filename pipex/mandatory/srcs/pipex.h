@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:11:12 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/24 15:45:14 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/24 18:08:55 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "../libft/ft_printf/ft_printf.h"
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <errno.h>
 # include <fcntl.h>
 
 typedef struct t_cmd	t_cmd;
