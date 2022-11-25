@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:34:34 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/24 20:51:23 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/25 23:08:45 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,28 @@
 
 void	init_files(t_data *info, char *files_one, char *files_two)
 {
-	char	**files;
+	t_files	**files;
 	size_t	i;
+	char	*file;
 
 	i = -1;
-	files = ft_calloc(sizeof(char *), 3);
+	files = ft_calloc(sizeof(t_files *), 3);
 	if (!files)
 		print_err_and_exit("Failled to allocate memory", info, 0);
-	files[0] = ft_strdup(files_one);
-	if (!files[0])
-		print_err_and_exit("Failled to allocate memory", info, 0);
-	files[1] = ft_strdup(files_two);
-	if (!files[1])
-		print_err_and_exit("Failled to allocate memory", info, 0);
+	while (++i < 2)
+	{
+		if (i == 0)
+			file = files_one;
+		else
+			file = files_two;
+		files[i] = malloc(sizeof(t_files));
+		if (!files[i])
+			print_err_and_exit("Failled to allocate memory", info, 0);
+		files[i]-> file = ft_strdup(file);
+		if (!files[i]-> file)
+			print_err_and_exit("Failled to allocate memory", info, 0);
+		files[i]-> fd = 0;
+	}
 	info -> files = files;
 }
 
@@ -40,7 +49,7 @@ void	fill_struct(t_cmd **cmds, char **argv)
 	{
 		tab = ft_split(argv[i + 2], ' ');
 		if (!tab)
-			print_err_and_exit("Failled to allocate memory", cmds[0] -> info, 0);
+			print_err_and_exit("Failled to allocate memory", cmds[0]-> info, 0);
 		cmds[i]-> cmd = tab[0];
 		cmds[i]-> args = tab;
 	}
@@ -70,10 +79,11 @@ void	set_cmd(t_cmd *cmd, char *envp[])
 void	init_cmd(t_data *info, char **argv, int argc, char **envp)
 {
 	t_cmd	**cmds;
-	int	i;
+	int		i;
 
 	info -> files = NULL;
 	info -> num_cmds = argc - 3;
+	info -> prev_pipes = -1;
 	i = -1;
 	cmds = ft_calloc(sizeof(t_cmd *), info -> num_cmds + 1);
 	if (!cmds)

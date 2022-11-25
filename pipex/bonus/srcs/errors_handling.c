@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:31:37 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/24 17:13:52 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/25 23:16:48 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,18 @@ void	free_cmd(t_cmd **cmd)
 	free(cmd);
 }
 
-void	free_files(char **files)
+void	free_files(t_files **files)
 {
 	size_t	i;
 
 	i = -1;
 	if (!files)
 		return ;
-	while (++i < 2)
+	while (files[++i])
+	{
+		free(files[i]-> file);
 		free(files[i]);
+	}
 	free(files);
 }
 
@@ -54,9 +57,11 @@ void	free_all(t_data *to_free, int code)
 void	print_err_and_exit(char *str, t_data *info, int type)
 {
 	if (type)
-		perror("Error");
+		perror(str);
 	else
-		ft_putstr_fd("Error", 2);
-	ft_putstr_fd(str, 2);
+		ft_putstr_fd(str, 2);
+	if (info -> init_pipes)
+		if (close(info -> pipes[0]) || close(info -> pipes[1]))
+			perror("Error");
 	free_all(info, EXIT_FAILURE);
 }

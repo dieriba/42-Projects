@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:28:59 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/23 13:29:50 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/25 19:39:53 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ char	*find_path(char *envp[])
 			return (envp[i]);
 	}
 	return (0);
+}
+
+void	close_fd(t_data *data, int fd, char *str)
+{
+	if (close(fd) < 0)
+		print_err_and_exit(str, data, 1);
 }
 
 int	check_empty(int argc, char **argv)
