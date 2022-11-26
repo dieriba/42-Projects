@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:11:12 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/24 18:08:55 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/26 20:51:42 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct t_data
 {
 	int		pipes[2];
 	int		init_pipes;
+	int		status;
 	t_cmd	**cmd_data;
 	char	**files;
 }	t_data;
@@ -37,6 +38,7 @@ typedef struct t_data
 typedef struct t_cmd
 {
 	t_data	*info;
+	pid_t	pid;
 	int		no_path;
 	char	*cmd;
 	char	**envp;
@@ -45,9 +47,10 @@ typedef struct t_cmd
 	char	*path;
 }	t_cmd;
 
+void	wait_all_child(t_cmd **cmds);
 void	free_all(t_data *to_free, int code);
 void	create_pipe(t_data *data);
-void	print_err_and_exit(char *str, t_data *info, int type);
+void	print_err_and_exit(char *str, t_cmd *cmd, t_data *info, int type);
 void	init_cmd(t_data *info, char **argv, char **envp);
 void	set_path_type(t_cmd **cmds);
 void	set_path(t_cmd **cmds);

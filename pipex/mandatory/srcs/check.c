@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:28:59 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/23 13:29:50 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/26 20:50:38 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,21 @@ int	check_empty(int argc, char **argv)
 			return (1);
 	}
 	return (0);
+}
+
+void	wait_all_child(t_cmd **cmds)
+{
+	size_t	i;
+	int		status;
+	t_data	*info;
+
+	info = cmds[0]-> info;
+	i = -1;
+	while (cmds[++i])
+	{
+		if (waitpid(cmds[i]-> pid, &status, 0) < 0)
+			print_err_and_exit("Error with waitpid", NULL, info, 1);
+	}
+	if (WIFEXITED(status))
+		info -> status = WEXITSTATUS(status);
 }

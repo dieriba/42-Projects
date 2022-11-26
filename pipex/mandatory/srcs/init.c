@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:34:34 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/24 15:44:54 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/26 21:04:09 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	init_files(t_data *info, char *files_one, char *files_two)
 
 	files = ft_calloc(sizeof(char *), 3);
 	if (!files)
-		print_err_and_exit("Failled to allocate memory", info, 0);
+		print_err_and_exit("Failled to allocate memory", NULL, info, 0);
 	files[0] = ft_strdup(files_one);
 	if (!files[0])
-		print_err_and_exit("Failled to allocate memory", info, 0);
+		print_err_and_exit("Failled to allocate memory", NULL, info, 0);
 	files[1] = ft_strdup(files_two);
 	if (!files[1])
-		print_err_and_exit("Failled to allocate memory", info, 0);
+		print_err_and_exit("Failled to allocate memory", NULL, info, 0);
 	info -> files = files;
 }
 
@@ -34,7 +34,7 @@ void	fill_struct(t_cmd *cmds, char *argv)
 
 	tab = ft_split(argv, ' ');
 	if (!tab)
-		print_err_and_exit("Failled to allocate memory", cmds -> info, 0);
+		print_err_and_exit("Failled to allocate memory", NULL, cmds -> info, 0);
 	cmds -> cmd = tab[0];
 	cmds -> args = tab;
 }
@@ -68,15 +68,16 @@ void	init_cmd(t_data *data, char **argv, char *envp[])
 	data -> files = NULL;
 	data -> init_pipes = 0;
 	i = -1;
+	data -> status = 0;
 	cmds = ft_calloc(sizeof(t_cmd *), 3);
 	if (!cmds)
-		print_err_and_exit("Failled to allocate memory", data, 0);
+		print_err_and_exit("Failled to allocate memory", NULL, data, 0);
 	data -> cmd_data = cmds;
 	while (++i < 2)
 	{
 		cmds[i] = ft_calloc(sizeof(t_cmd), 1);
 		if (!cmds[i])
-			print_err_and_exit("Failled to allocate memory", data, 0);
+			print_err_and_exit("Failled to allocate memory", NULL, data, 0);
 		set_cmd(cmds[i], envp);
 	}
 	init_files(data, argv[1], argv[4]);

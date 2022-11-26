@@ -24,5 +24,5 @@ int	main(int argc, char *argv[], char *envp[])
 	ft_memset(&info, 0, sizeof(t_data));
 	init_cmd(&info, argv, envp);
 	create_pipe(&info);
-	free_all(&info, EXIT_SUCCESS);
+	free_all(&info, info.status);
 }
