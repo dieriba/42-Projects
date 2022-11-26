@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:34:34 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/25 23:08:45 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/26 16:38:54 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ void	init_files(t_data *info, char *files_one, char *files_two)
 		else
 			file = files_two;
 		if (info -> here_doc)
+		{
 			file = create_file(info);
+			if (!file)
+				print_err_and_exit("An error occured with here_doc", info, 0);
+		}
 		files[i] = ft_strdup(file);
 		if (!files[i])
 			print_err_and_exit("Failled to allocate memory", info, 0);
@@ -41,11 +45,13 @@ void	fill_struct(t_cmd **cmds, char **argv)
 {
 	char	**tab;
 	size_t	i;
+	size_t	j;
 
-	i = -1 + 2 + (cmds[0] -> info -> here_doc == 1);
+	j = -1 + 2 + (cmds[0]-> info -> here_doc == 1) + 1;
+	i = -1;
 	while (cmds[++i])
 	{
-		tab = ft_split(argv[i], ' ');
+		tab = ft_split(argv[j + i], ' ');
 		if (!tab)
 			print_err_and_exit("Failled to allocate memory", cmds[0]-> info, 0);
 		cmds[i]-> cmd = tab[0];
@@ -82,7 +88,7 @@ void	init_cmd(t_data *info, char **argv, int argc, char **envp)
 	info -> files = NULL;
 	info -> num_cmds = argc - 3 - (info -> here_doc == 1);
 	info -> prev_pipes = -1;
-	info -> LIMITER = argv[2];
+	info -> limiter = argv[2];
 	i = -1;
 	cmds = ft_calloc(sizeof(t_cmd *), info -> num_cmds + 1);
 	if (!cmds)

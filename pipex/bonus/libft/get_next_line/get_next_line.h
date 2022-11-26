@@ -15,7 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-#define BUFFER_SIZE 4096
+# define BUFFER_SIZE 4096
 
 size_t	ft_strlen(const char *s);
 char	*ft_callocs(size_t nmemb, size_t size);

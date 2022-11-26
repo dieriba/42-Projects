@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:11:12 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/25 23:09:34 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/26 16:32:14 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct t_data
 	int		init_pipes;
 	int		pipes[2];
 	int		prev_pipes;
-	char	*LIMITER;
+	char	*limiter;
 }	t_data;
 
 typedef struct t_cmd
@@ -60,5 +60,5 @@ char	*find_path(char **envp);
 int		check_empty(int argc, char **argv);
 void	piping(t_data	*data, int pipes[2]);
 void	close_fd(t_data *data, int fd, char *str);
-char    *create_file(t_data *info);
+char	*create_file(t_data *info);
 #endif
