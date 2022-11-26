@@ -60,8 +60,5 @@ void	print_err_and_exit(char *str, t_data *info, int type)
 		perror(str);
 	else
 		ft_putstr_fd(str, 2);
-	if (info -> init_pipes)
-		if (close(info -> pipes[0]) || close(info -> pipes[1]))
-			perror("Error");
 	free_all(info, EXIT_FAILURE);
 }

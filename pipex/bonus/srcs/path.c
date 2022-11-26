@@ -40,10 +40,8 @@ void	set_path(t_cmd **cmds)
 void	set_path_type(t_cmd **cmds)
 {
 	size_t	i;
-	size_t	j;
 
 	i = -1;
-	j = 0;
 	while (cmds[++i])
 	{
 		if (!ft_strchr(cmds[i]-> cmd, '/'))

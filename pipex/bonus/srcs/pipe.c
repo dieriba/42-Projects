@@ -28,7 +28,7 @@ void	run_cmd(t_cmd *cmd)
 	else
 		if (access(cmd -> cmd, X_OK) != -1)
 			execve(cmd -> cmd, cmd -> args, cmd -> envp);
-	print_err_and_exit("pipex", cmd -> info, 1);
+	print_err_and_exit("Pipex", cmd -> info, 1);
 }
 
 void	start(t_cmd *cmd, int pipes[2])

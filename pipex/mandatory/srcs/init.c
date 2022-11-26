@@ -15,9 +15,7 @@
 void	init_files(t_data *info, char *files_one, char *files_two)
 {
 	char	**files;
-	size_t	i;
 
-	i = -1;
 	files = ft_calloc(sizeof(char *), 3);
 	if (!files)
 		print_err_and_exit("Failled to allocate memory", info, 0);
