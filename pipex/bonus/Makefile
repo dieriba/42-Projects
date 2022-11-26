@@ -1,4 +1,4 @@
-SRCS		=	./srcs/pipex.c ./srcs/init.c ./srcs/check.c ./srcs/errors_handling.c ./srcs/path.c ./srcs/pipe.c
+SRCS		=	./srcs/pipex.c ./srcs/init.c ./srcs/check.c ./srcs/errors_handling.c ./srcs/path.c ./srcs/pipe.c ./srcs/utils.c
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -20,14 +20,16 @@ $(PIPEX):	${OBJS}
 			cp ./libft/ft_printf/libprintf.a ./lib
 			make -C ./libft
 			cp ./libft/libft.a ./lib
-			$(CC) $(CFLAGS) ${OBJS} -g3 -L./lib -lft -lprintf -o $(PIPEX)
+			make -C ./libft/get_next_line
+			cp ./libft/get_next_line/libgnl.a ./lib
+			$(CC) $(CFLAGS) ${OBJS} -g3 -L./lib -lft -lprintf -lgnl -o $(PIPEX)
 
 clean:
 			rm -rf ./srcs/*.o
 			rm -rf ./srcs/*.d
 			
 fclean:		clean
-			rm -rf $(PIPEX) ./lib/libft.a ./lib/libprintf.a
+			rm -rf $(PIPEX) ./lib/*.a
 
 re:			fclean all
 

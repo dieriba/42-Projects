@@ -14,12 +14,12 @@
 
 void	init_files(t_data *info, char *files_one, char *files_two)
 {
-	t_files	**files;
+	char	**files;
 	size_t	i;
 	char	*file;
 
 	i = -1;
-	files = ft_calloc(sizeof(t_files *), 3);
+	files = ft_calloc(sizeof(char *), 2);
 	if (!files)
 		print_err_and_exit("Failled to allocate memory", info, 0);
 	while (++i < 2)
@@ -28,13 +28,11 @@ void	init_files(t_data *info, char *files_one, char *files_two)
 			file = files_one;
 		else
 			file = files_two;
-		files[i] = malloc(sizeof(t_files));
+		if (info -> here_doc)
+			file = create_file(info);
+		files[i] = ft_strdup(file);
 		if (!files[i])
 			print_err_and_exit("Failled to allocate memory", info, 0);
-		files[i]-> file = ft_strdup(file);
-		if (!files[i]-> file)
-			print_err_and_exit("Failled to allocate memory", info, 0);
-		files[i]-> fd = 0;
 	}
 	info -> files = files;
 }
@@ -44,10 +42,10 @@ void	fill_struct(t_cmd **cmds, char **argv)
 	char	**tab;
 	size_t	i;
 
-	i = -1;
+	i = -1 + 2 + (cmds[0] -> info -> here_doc == 1);
 	while (cmds[++i])
 	{
-		tab = ft_split(argv[i + 2], ' ');
+		tab = ft_split(argv[i], ' ');
 		if (!tab)
 			print_err_and_exit("Failled to allocate memory", cmds[0]-> info, 0);
 		cmds[i]-> cmd = tab[0];
@@ -82,8 +80,9 @@ void	init_cmd(t_data *info, char **argv, int argc, char **envp)
 	int		i;
 
 	info -> files = NULL;
-	info -> num_cmds = argc - 3;
+	info -> num_cmds = argc - 3 - (info -> here_doc == 1);
 	info -> prev_pipes = -1;
+	info -> LIMITER = argv[2];
 	i = -1;
 	cmds = ft_calloc(sizeof(t_cmd *), info -> num_cmds + 1);
 	if (!cmds)

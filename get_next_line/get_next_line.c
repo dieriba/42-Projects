@@ -25,7 +25,7 @@ char	*next_lines(char *lines)
 		i++;
 	if (lines[i])
 	{
-		new_lines = ft_calloc(((ft_strlen(lines) - i + 1)), sizeof(char));
+		new_lines = ft_callocs(((ft_strlen(lines) - i + 1)), sizeof(char));
 		if (!new_lines)
 			return (NULL);
 		if (lines[i] == '\n')
@@ -64,7 +64,7 @@ char	*ft_lines(char *lines, char *buffer, int ret, int fd)
 		if (ret < 0)
 			return (NULL);
 		buffer[ret] = '\0';
-		lines = ft_strjoin(lines, buffer, ret);
+		lines = ft_strjoins(lines, buffer, ret);
 		if (!lines)
 			return (NULL);
 	}
@@ -81,7 +81,7 @@ char	*ft_getlines(char *lines)
 		return (NULL);
 	while (lines[i] && lines[i] != '\n')
 		i++;
-	new_lines = ft_calloc((i + 2), sizeof(char));
+	new_lines = ft_callocs((i + 2), sizeof(char));
 	if (!new_lines)
 		return (NULL);
 	i = 0;
@@ -104,7 +104,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, NULL, 0) < 0)
 		return (NULL);
-	buffer = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
+	buffer = ft_callocs((BUFFER_SIZE + 1), sizeof(char));
 	if (!buffer)
 		return (NULL);
 	lines = ft_lines(lines, buffer, 1, fd);

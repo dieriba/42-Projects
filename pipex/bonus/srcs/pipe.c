@@ -36,16 +36,17 @@ void	start(t_cmd *cmd, int pipes[2])
 	char	*file;
 	int		fd;
 
-	file = cmd -> info -> files[0]-> file;
+	file = cmd -> info -> files[0];
 	if (access(file, F_OK | R_OK) < 0)
 		print_err_and_exit("Pipex ", cmd -> info, 1);
 	fd = open(file, O_RDONLY);
-	cmd -> info -> files[0]-> fd = fd;
 	if (fd < 0)
 		print_err_and_exit("Pipex ", cmd -> info, 1);
 	if (dup2(fd, STDIN_FILENO) < 0)
 		print_err_and_exit("Pipex ", cmd -> info, 1);
 	if (close(fd) < 0)
+		print_err_and_exit("Pipex ", cmd -> info, 1);
+	if (cmd -> info -> here_doc && unlink(cmd -> info -> LIMITER) < 0)
 		print_err_and_exit("Pipex ", cmd -> info, 1);
 	if (dup2(pipes[1], STDOUT_FILENO) < 0)
 		print_err_and_exit("Pipex ", cmd -> info, 1);
@@ -59,9 +60,8 @@ void	end(t_cmd *cmd, int pipes[2], int prev_pipes)
 	char	*file;
 	int		fd;
 
-	file = cmd -> info -> files[1]-> file;
+	file = cmd -> info -> files[1];
 	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	cmd -> info -> files[1]-> fd = fd;
 	if (access(file, W_OK) < 0)
 		print_err_and_exit("Pipex ", cmd -> info, 1);
 	if (fd < 0)

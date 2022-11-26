@@ -32,18 +32,15 @@ void	free_cmd(t_cmd **cmd)
 	free(cmd);
 }
 
-void	free_files(t_files **files)
+void	free_files(char **files)
 {
 	size_t	i;
 
 	i = -1;
 	if (!files)
 		return ;
-	while (files[++i])
-	{
-		free(files[i]-> file);
+	while (++i < 2)
 		free(files[i]);
-	}
 	free(files);
 }
 

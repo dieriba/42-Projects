@@ -22,24 +22,21 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include "../libft/get_next_line/get_next_line.h"
 
 typedef struct t_cmd	t_cmd;
 typedef struct t_data	t_data;
-
-typedef struct t_files {
-	char	*file;
-	int		fd;
-}	t_files;
 
 typedef struct t_data
 {
 	int		here_doc;
 	int		num_cmds;
 	t_cmd	**cmd_data;
-	t_files	**files;
+	char	**files;
 	int		init_pipes;
 	int		pipes[2];
 	int		prev_pipes;
+	char	*LIMITER;
 }	t_data;
 
 typedef struct t_cmd
@@ -63,4 +60,5 @@ char	*find_path(char **envp);
 int		check_empty(int argc, char **argv);
 void	piping(t_data	*data, int pipes[2]);
 void	close_fd(t_data *data, int fd, char *str);
+char    *create_file(t_data *info);
 #endif

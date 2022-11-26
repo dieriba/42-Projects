@@ -17,7 +17,7 @@
 # include <fcntl.h>
 
 size_t	ft_strlen(const char *s);
-char	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_callocs(size_t nmemb, size_t size);
 char	*get_next_line(int fd);
-char	*ft_strjoin(char *s1, char *s2, size_t len);
+char	*ft_strjoins(char *s1, char *s2, size_t len);
 #endif
