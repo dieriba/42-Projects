@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:28:59 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/25 19:39:53 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/26 17:34:52 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*find_path(char *envp[])
 void	close_fd(t_data *data, int fd, char *str)
 {
 	if (close(fd) < 0)
-		print_err_and_exit(str, data, 1);
+		print_err_and_exit(str, NULL, data, 1);
 }
 
 int	check_empty(int argc, char **argv)

@@ -28,5 +28,5 @@ int	main(int argc, char *argv[], char *envp[])
 		info.here_doc = 0;
 	init_cmd(&info, argv, argc, envp);
 	piping(&info, info.pipes);
-	free_all(&info, EXIT_SUCCESS);
+	free_all(&info, info.status);
 }

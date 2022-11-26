@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:31:37 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/25 23:16:48 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/26 19:30:19 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,26 @@ void	free_all(t_data *to_free, int code)
 	exit(code);
 }
 
-void	print_err_and_exit(char *str, t_data *info, int type)
+void	print_err_and_exit(char *str, t_cmd *cmd, t_data *info, int type)
 {
-	if (type)
+	if (errno == 2 && cmd && cmd -> no_path)
+	{
+		ft_putstr_fd("bash: command not found: ", 2);
+		ft_putstr_fd(cmd -> args[0], 2);
+		ft_putchar_fd('\n', 2);
+	}
+	else if (errno == 2 && cmd && !cmd -> no_path)
+	{
+		ft_putstr_fd("bash: no such file or directory: ", 2);
+		ft_putstr_fd(cmd -> cmd, 2);
+		ft_putchar_fd('\n', 2);
+	}
+	else if (type)
 		perror(str);
 	else
+	{
 		ft_putstr_fd(str, 2);
-	free_all(info, EXIT_FAILURE);
+		ft_putchar_fd('\n', 2);
+	}
+	free_all(info, info -> status);
 }
