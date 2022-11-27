@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:37:31 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/26 19:54:30 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/27 17:40:54 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*create_file(t_data *info)
 	get_next_line(0, last);
 	free(line);
 	free(info -> limiter);
-	if(close(info -> doc_fd) < 0)
+	if (close(info -> doc_fd) < 0)
 		print_err_and_exit("Error", NULL, info, 1);
 	info -> doc_fd = 0;
 	return ("here_doc");
@@ -50,7 +50,7 @@ char	*start_here_doc(t_data *info)
 		print_err_and_exit("Failled to allocate memory", NULL, info, 1);
 	file = create_file(info);
 	if (!file)
-		print_err_and_exit("Failled to allocate memory",NULL, info, 1);
+		print_err_and_exit("Failled to allocate memory", NULL, info, 1);
 	return (file);
 }
 

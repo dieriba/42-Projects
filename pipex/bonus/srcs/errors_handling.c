@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:31:37 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/26 19:30:19 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/27 17:40:21 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	print_err_and_exit(char *str, t_cmd *cmd, t_data *info, int type)
 		ft_putchar_fd('\n', 2);
 	}
 	if (info -> doc_fd)
-		if(close(info -> doc_fd) < 0)
+		if (close(info -> doc_fd) < 0)
 			perror("Error");
 	free_all(info, info -> status);
 }
