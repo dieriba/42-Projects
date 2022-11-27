@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlens(const char *s)
 {
 	size_t	i;
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-void	ft_bzero(char *s, size_t n)
+void	ft_bzeros(char *s, size_t n)
 {
 	size_t	i;
 
@@ -31,18 +31,18 @@ void	ft_bzero(char *s, size_t n)
 		s[i++] = 0;
 }
 
-char	*ft_calloc(size_t nmemb, size_t size)
+char	*ft_callocs(size_t nmemb, size_t size)
 {
 	char	*buff;
 
 	buff = malloc(size * nmemb);
 	if (!buff)
 		return (NULL);
-	ft_bzero(buff, (size * nmemb));
+	ft_bzeros(buff, (size * nmemb));
 	return (buff);
 }
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpys(void *dest, const void *src, size_t n)
 {
 	char	*dest_ptr;
 	char	*src_ptr;
@@ -61,21 +61,21 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-char	*ft_strjoin(char *s1, char *s2, size_t len)
+char	*ft_strjoins(char *s1, char *s2, size_t len)
 {
 	size_t	i;
 	char	*buff;
 
 	if (!s1)
-		s1 = ft_calloc(1, sizeof(char));
+		s1 = ft_callocs(1, sizeof(char));
 	if (!s1 || !s2)
 		return (NULL);
-	i = ft_strlen(s1);
+	i = ft_strlens(s1);
 	buff = malloc(sizeof(char) * (i + len + 1));
 	if (!buff)
 		return (NULL);
-	ft_memcpy(buff, s1, i);
-	ft_memcpy(buff + i, s2, (len + 1));
+	ft_memcpys(buff, s1, i);
+	ft_memcpys(buff + i, s2, (len + 1));
 	free(s1);
 	return (buff);
 }

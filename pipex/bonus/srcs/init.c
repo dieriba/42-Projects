@@ -18,22 +18,16 @@ void	init_files(t_data *info, char *files_one, char *files_two)
 	char	*file;
 
 	i = -1;
+	file = files_one;
 	info -> files = ft_calloc(sizeof(char *), 2);
 	if (!info -> files)
-		print_err_and_exit("Failled to allocate memory", NULL, info, 0);
+		print_err_and_exit("Failled to allocate memory", NULL, info, 1);
 	while (++i < 2)
 	{
-		if (i == 0)
-			file = files_one;
-		else
+		if (info -> here_doc && i == 0)
+			file = start_here_doc(info);
+		else if (i == 1)
 			file = files_two;
-		if (info -> here_doc)
-		{
-			file = create_file(info);
-			if (!file)
-				print_err_and_exit("An error occured with here_doc",
-					NULL, info, 0);
-		}
 		info -> files[i] = ft_strdup(file);
 		if (!info -> files[i])
 			print_err_and_exit("Failled to allocate memory", NULL, info, 0);

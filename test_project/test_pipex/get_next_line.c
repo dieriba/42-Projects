@@ -97,12 +97,17 @@ char	*ft_getlines(char *lines)
 	return (new_lines);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int limiter)
 {
 	char		*buffer;
 	static char	*lines;
 	char		*res;
 
+	if(!limiter)
+	{
+		free(lines);
+		return (NULL);
+	}
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, NULL, 0) < 0)
 		return (NULL);
 	buffer = ft_calloc((BUFFER_SIZE + 1), sizeof(char));

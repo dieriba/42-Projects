@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 # include "../libft/ft_printf/ft_printf.h"
+# include "../libft/get_next_line/get_next_line.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -64,4 +65,5 @@ int		check_empty(int argc, char **argv);
 void	piping(t_data	*data, int pipes[2]);
 void	close_fd(t_data *data, int fd, char *str);
 char	*create_file(t_data *info);
+char	*start_here_doc(t_data *info);
 #endif

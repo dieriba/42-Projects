@@ -25,7 +25,7 @@ char	*next_lines(char *lines)
 		i++;
 	if (lines[i])
 	{
-		new_lines = ft_callocs(((ft_strlen(lines) - i + 1)), sizeof(char));
+		new_lines = ft_callocs(((ft_strlens(lines) - i + 1)), sizeof(char));
 		if (!new_lines)
 			return (NULL);
 		if (lines[i] == '\n')
@@ -40,13 +40,13 @@ char	*next_lines(char *lines)
 	return (new_lines);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchrs(const char *s, int c)
 {
 	size_t	i;
 
 	i = 0;
 	if (!c)
-		return ((char *)(s) + ft_strlen(s));
+		return ((char *)(s) + ft_strlens(s));
 	while (s[i])
 	{
 		if (s[i] == (char)c)
@@ -58,7 +58,7 @@ char	*ft_strchr(const char *s, int c)
 
 char	*ft_lines(char *lines, char *buffer, int ret, int fd)
 {
-	while (ret && !ft_strchr(buffer, '\n'))
+	while (ret && !ft_strchrs(buffer, '\n'))
 	{
 		ret = read(fd, buffer, BUFFER_SIZE);
 		if (ret < 0)
@@ -98,12 +98,17 @@ char	*ft_getlines(char *lines)
 	return (new_lines);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int last)
 {
 	char		*buffer;
 	static char	*lines;
 	char		*res;
 
+	if (!last)
+	{
+		free(lines);
+		return (NULL);
+	}
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, NULL, 0) < 0)
 		return (NULL);
 	buffer = ft_callocs((BUFFER_SIZE + 1), sizeof(char));

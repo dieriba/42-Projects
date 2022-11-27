@@ -14,16 +14,41 @@
 
 char	*create_file(t_data *info)
 {
-	char	*file;
 	int		fd;
-	char	*limiter;
+	char	*line;
+	int		last;
 
-	limiter = info -> limiter;
+	last = 1;
 	fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC);
 	if (fd < 0)
 		print_err_and_exit("Error", NULL, info, 1);
-	// ft_strcmp(get_next_line(fd), limiter);
-	file = NULL;
+	while (1)
+	{
+		line = get_next_line(0, last);
+		last = ft_strcmp(line, info -> limiter);
+		if (!last)
+			break ;
+		write(fd, line, ft_strlen(line));
+		free(line);
+	}
+	get_next_line(0, last);
+	free(line);
+	free(info -> limiter);
+	if(close(fd) < 0)
+		print_err_and_exit("Error", NULL, info, 1);
+	return ("here_doc");
+}
+
+char	*start_here_doc(t_data *info)
+{
+	char	*file;
+
+	info -> limiter = ft_strjoin(info -> limiter, "\n");
+	if (!info -> limiter)
+		print_err_and_exit("Failled to allocate memory", NULL, info, 1);
+	file = create_file(info);
+	if (!file)
+		print_err_and_exit("Failled to allocate memory",NULL, info, 1);
 	return (file);
 }
 

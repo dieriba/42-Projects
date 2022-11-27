@@ -17,8 +17,8 @@
 # include <fcntl.h>
 # define BUFFER_SIZE 4096
 
-size_t	ft_strlen(const char *s);
+size_t	ft_strlens(const char *s);
 char	*ft_callocs(size_t nmemb, size_t size);
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, int last);
 char	*ft_strjoins(char *s1, char *s2, size_t len);
 #endif

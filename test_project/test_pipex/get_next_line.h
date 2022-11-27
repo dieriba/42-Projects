@@ -18,6 +18,6 @@
 # define BUFFER_SIZE 4096
 size_t	ft_strlen(const char *s);
 char	*ft_calloc(size_t nmemb, size_t size);
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, int limiter);
 char	*ft_strjoin(char *s1, char *s2, size_t len);
 #endif

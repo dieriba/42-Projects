@@ -49,7 +49,7 @@ void	start(t_cmd *cmd, int pipes[2])
 		print_err_and_exit("pipex ", NULL, cmd -> info, 1);
 	if (close(fd) < 0)
 		print_err_and_exit("pipex ", NULL, cmd -> info, 1);
-	if (cmd -> info -> here_doc && unlink(cmd -> info -> limiter) < 0)
+	if (cmd -> info -> here_doc && unlink("here_doc") < 0)
 		print_err_and_exit("pipex ", NULL, cmd -> info, 1);
 	if (dup2(pipes[1], STDOUT_FILENO) < 0)
 		print_err_and_exit("pipex ", NULL, cmd -> info, 1);
