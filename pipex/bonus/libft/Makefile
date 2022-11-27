@@ -49,7 +49,8 @@ SRCS 		=	ft_atoi.c \
 				ft_toupper.c \
 				ft_free_tab.c \
 				ft_tablen.c \
-				ft_strcmp.c
+				ft_strcmp.c \
+				ft_check_empty.c
 
 BONUS		=	ft_lstnew.c \
 				ft_lstadd_front.c \

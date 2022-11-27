@@ -46,16 +46,3 @@ void	close_fd(t_data *data, int fd, char *str)
 	if (close(fd) < 0)
 		print_err_and_exit(str, NULL, data, 1);
 }
-
-int	check_empty(int argc, char **argv)
-{
-	int	i;
-
-	i = 0;
-	while (++i < argc)
-	{
-		if (!argv[i][0])
-			return (1);
-	}
-	return (0);
-}

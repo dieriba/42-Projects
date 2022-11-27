@@ -2,6 +2,7 @@
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
         "pipex.h": "c",
-        "libft.h": "c"
+        "libft.h": "c",
+        "wait.h": "c"
     }
 }

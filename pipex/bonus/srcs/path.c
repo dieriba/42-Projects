@@ -40,14 +40,19 @@ void	set_path(t_cmd **cmds)
 void	set_path_type(t_cmd **cmds)
 {
 	size_t	i;
+	char	*cmd;
 
 	i = -1;
 	while (cmds[++i])
 	{
-		if (!ft_strchr(cmds[i]-> cmd, '/'))
+		if (!ft_strchr(cmds[i]-> cmd, '/') || !cmds[i]-> cmd)
 		{
+			if (!cmds[i]-> cmd)
+				cmd = "''";
+			else
+				cmd = cmds[i]-> cmd;
 			cmds[i]-> no_path = 1;
-			cmds[i]-> cmd = ft_strjoin("/", cmds[i]-> cmd);
+			cmds[i]-> cmd = ft_strjoin("/", cmd);
 			if (!cmds[i]-> cmd)
 				print_err_and_exit("Failled to allocate memory", NULL,
 					cmds[0]-> info, 0);

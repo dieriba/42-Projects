@@ -39,6 +39,7 @@ typedef struct t_data
 	int		prev_pipes;
 	int		status;
 	char	*limiter;
+	int		doc_fd;
 }	t_data;
 
 typedef struct t_cmd

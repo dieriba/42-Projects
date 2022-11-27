@@ -62,9 +62,14 @@ void	end(t_cmd *cmd, int pipes[2], int prev_pipes)
 {
 	char	*file;
 	int		fd;
-
+	int		flags;
+	
+	if (cmd -> info -> here_doc)
+		flags = O_RDWR | O_CREAT | O_APPEND;
+	else
+		flags = O_WRONLY | O_CREAT | O_TRUNC;
 	file = cmd -> info -> files[1];
-	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	fd = open(file, flags, 0666);
 	if (access(file, W_OK) < 0)
 		print_err_and_exit("pipex ", NULL, cmd -> info, 1);
 	if (fd < 0)

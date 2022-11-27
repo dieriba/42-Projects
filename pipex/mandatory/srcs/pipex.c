@@ -16,7 +16,7 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	info;
 
-	if (argc != 5 || check_empty(argc, argv))
+	if (argc != 5)
 	{
 		ft_printf("Usage : %s 'file1' 'cmd1' 'cmd2' 'file2'\n", argv[0]);
 		exit(EXIT_FAILURE);

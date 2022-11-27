@@ -58,12 +58,14 @@ void	print_err_and_exit(char *str, t_cmd *cmd, t_data *info, int type)
 		ft_putstr_fd("bash: command not found: ", 2);
 		ft_putstr_fd(cmd -> args[0], 2);
 		ft_putchar_fd('\n', 2);
+		info -> status = 127;
 	}
 	else if (errno == 2 && cmd && !cmd -> no_path)
 	{
 		ft_putstr_fd("bash: no such file or directory: ", 2);
 		ft_putstr_fd(cmd -> cmd, 2);
 		ft_putchar_fd('\n', 2);
+		info -> status = 127;
 	}
 	else if (type)
 		perror(str);

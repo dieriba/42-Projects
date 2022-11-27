@@ -41,19 +41,6 @@ char	*find_path(char *envp[])
 	return (0);
 }
 
-int	check_empty(int argc, char **argv)
-{
-	int	i;
-
-	i = 0;
-	while (++i < argc)
-	{
-		if (!argv[i][0])
-			return (1);
-	}
-	return (0);
-}
-
 void	wait_all_child(t_cmd **cmds)
 {
 	size_t	i;

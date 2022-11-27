@@ -14,28 +14,30 @@
 
 char	*create_file(t_data *info)
 {
-	int		fd;
-	char	*line;
-	int		last;
+	char		*line;
+	static int	last = 1;
 
-	last = 1;
-	fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC);
-	if (fd < 0)
+	info -> doc_fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC);
+	if (info -> doc_fd < 0)
 		print_err_and_exit("Error", NULL, info, 1);
 	while (1)
 	{
 		line = get_next_line(0, last);
+		if (!line)
+			print_err_and_exit("Error", NULL, info, 1);
 		last = ft_strcmp(line, info -> limiter);
 		if (!last)
 			break ;
-		write(fd, line, ft_strlen(line));
+		if (write(info -> doc_fd, line, ft_strlen(line)) < 0)
+			print_err_and_exit("Error", NULL, info, 1);
 		free(line);
 	}
 	get_next_line(0, last);
 	free(line);
 	free(info -> limiter);
-	if(close(fd) < 0)
+	if(close(info -> doc_fd) < 0)
 		print_err_and_exit("Error", NULL, info, 1);
+	info -> doc_fd = 0;
 	return ("here_doc");
 }
 
@@ -65,7 +67,6 @@ void	wait_all_child(t_cmd **cmds)
 		if (waitpid(cmds[i]-> pid, &status, 0) < 0)
 			print_err_and_exit("Error with waitpid", NULL, info, 1);
 	}
-	info -> status = -1;
 	if (WIFEXITED(status))
 		info -> status = WEXITSTATUS(status);
 }
