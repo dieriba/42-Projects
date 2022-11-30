@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 13:31:37 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/30 13:28:47 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/30 13:39:20 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	print_err_and_exit(char *str, t_cmd *cmd, t_data *info, int type)
 		if (close(cmd -> info -> pipes[1]) < 0)
 		 perror("Error");
 	}
-	if (cmd && info -> prev_pipes != -1)
+	if (info -> prev_pipes != -1)
 		if (close(info -> prev_pipes) < 0)
 			perror("Error");
 	if (info -> doc_fd)
