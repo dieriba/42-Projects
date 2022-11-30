@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 21:58:19 by dtoure            #+#    #+#             */
-/*   Updated: 2022/11/27 17:40:05 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/11/30 13:30:02 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	end(t_cmd *cmd, int pipes[2], int prev_pipes)
 		print_err_and_exit("bash ", cmd, cmd -> info, 1);
 	if (close(fd) < 0 || close(prev_pipes) < 0)
 		print_err_and_exit("bash ", cmd, cmd -> info, 1);
+	cmd -> info -> prev_pipes = -1;
 	run_cmd(cmd);
 }
 
