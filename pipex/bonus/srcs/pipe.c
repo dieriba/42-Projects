@@ -41,20 +41,21 @@ void	start(t_cmd *cmd, int pipes[2])
 
 	file = cmd -> info -> files[0];
 	if (access(file, F_OK | R_OK) < 0)
-		print_err_and_exit("bash ", NULL, cmd -> info, 1);
+		print_err_and_exit("bash ", cmd, cmd -> info, 1);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		print_err_and_exit("bash ", NULL, cmd -> info, 1);
+		print_err_and_exit("bash ", cmd, cmd -> info, 1);
 	if (dup2(fd, STDIN_FILENO) < 0)
-		print_err_and_exit("bash ", NULL, cmd -> info, 1);
+		print_err_and_exit("bash ", cmd, cmd -> info, 1);
 	if (close(fd) < 0)
-		print_err_and_exit("bash ", NULL, cmd -> info, 1);
+		print_err_and_exit("bash ", cmd, cmd -> info, 1);
 	if (cmd -> info -> here_doc && unlink("here_doc") < 0)
-		print_err_and_exit("bash ", NULL, cmd -> info, 1);
+		print_err_and_exit("bash ", cmd, cmd -> info, 1);
 	if (dup2(pipes[1], STDOUT_FILENO) < 0)
-		print_err_and_exit("bash ", NULL, cmd -> info, 1);
+		print_err_and_exit("bash ", cmd, cmd -> info, 1);
 	if (close(pipes[1]) < 0 || close(pipes[0]))
-		print_err_and_exit("bash ", NULL, cmd -> info, 1);
+		print_err_and_exit("bash ", cmd, cmd -> info, 1);
+	cmd -> inited = 0;
 	run_cmd(cmd);
 }
 
@@ -71,17 +72,18 @@ void	end(t_cmd *cmd, int pipes[2], int prev_pipes)
 	file = cmd -> info -> files[1];
 	fd = open(file, flags, 0666);
 	if (access(file, W_OK) < 0)
-		print_err_and_exit("bash ", NULL, cmd -> info, 1);
+		print_err_and_exit("bash ", cmd, cmd -> info, 1);
 	if (fd < 0)
-		print_err_and_exit("bash ", NULL, cmd -> info, 1);
+		print_err_and_exit("bash ", cmd, cmd -> info, 1);
 	if (dup2(prev_pipes, STDIN_FILENO) < 0)
-		print_err_and_exit("bash ", NULL, cmd -> info, 1);
+		print_err_and_exit("bash ", cmd, cmd -> info, 1);
 	if (close(pipes[0]) < 0 || close(pipes[1]) < 0)
-		print_err_and_exit("bash ", NULL, cmd -> info, 1);
+		print_err_and_exit("bash ", cmd, cmd -> info, 1);
+	cmd -> inited = 0;
 	if (dup2(fd, STDOUT_FILENO) < 0)
-		print_err_and_exit("bash ", NULL, cmd -> info, 1);
+		print_err_and_exit("bash ", cmd, cmd -> info, 1);
 	if (close(fd) < 0 || close(prev_pipes) < 0)
-		print_err_and_exit("bash ", NULL, cmd -> info, 1);
+		print_err_and_exit("bash ", cmd, cmd -> info, 1);
 	run_cmd(cmd);
 }
 
@@ -90,6 +92,7 @@ void	forking(t_data *data, int pipes[2], int i)
 	t_cmd	**cmds;
 
 	cmds = data -> cmd_data;
+	cmds[i]-> inited = 1;
 	if (i == 0)
 		start(data -> cmd_data[0], pipes);
 	else if (i == data -> num_cmds - 1)
@@ -102,11 +105,13 @@ void	forking(t_data *data, int pipes[2], int i)
 				print_err_and_exit("bash ", NULL, cmds[i]-> info, 1);
 			if (close(data -> prev_pipes) < 0)
 				print_err_and_exit("bash ", NULL, cmds[i]-> info, 1);
+			data -> prev_pipes = -1;
 		}
 		if (dup2(pipes[1], STDOUT_FILENO) < 0)
 			print_err_and_exit("bash ", NULL, cmds[i]-> info, 1);
 		if (close(pipes[1]) < 0 || close(pipes[0]) < 0)
 			print_err_and_exit("bash ", NULL, cmds[i]-> info, 1);
+		cmds[i]-> inited = 0;
 		run_cmd(cmds[i]);
 	}
 }
@@ -126,13 +131,14 @@ void	piping(t_data	*data, int pipes[2])
 		pid_ret = fork();
 		if (pid_ret < 0)
 			print_err_and_exit("bash", NULL, data, 1);
+		if (pid_ret)
+			close_fd(data, data -> pipes[1], "bash");
 		if (pid_ret == 0)
 			forking(data, pipes, i);
 		if (data -> prev_pipes != -1)
 			close_fd(data, data -> prev_pipes, "bash");
 		data -> prev_pipes = pipes[0];
 		cmds[i]-> pid = pid_ret;
-		close_fd(data, data -> pipes[1], "bash");
 	}
 	close_fd(data, data -> prev_pipes, "bash");
 	wait_all_child(cmds);

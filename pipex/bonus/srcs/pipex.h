@@ -34,7 +34,6 @@ typedef struct t_data
 	int		num_cmds;
 	t_cmd	**cmd_data;
 	char	**files;
-	int		init_pipes;
 	int		pipes[2];
 	int		prev_pipes;
 	int		status;
@@ -46,6 +45,9 @@ typedef struct t_cmd
 {
 	t_data	*info;
 	int		no_path;
+	int		inited;
+	int		read_end;
+	int		write_end;
 	char	*cmd;
 	char	**envp;
 	char	**args;

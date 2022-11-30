@@ -51,16 +51,19 @@ void	free_all(t_data *to_free, int code)
 	exit(code);
 }
 
-void	print_err_and_exit(char *str, t_cmd *cmd, t_data *info, int type)
+void	print_err(char *str, t_cmd *cmd, int type)
 {
-	if (errno == 2 && cmd && cmd -> no_path)
+	t_data	*info;
+
+	info = cmd -> info;
+	if (errno == 2 && cmd && cmd -> no_path && !cmd -> inited)
 	{
 		ft_putstr_fd("bash: command not found: ", 2);
 		ft_putstr_fd(cmd -> args[0], 2);
 		ft_putchar_fd('\n', 2);
 		info -> status = 127;
 	}
-	else if (errno == 2 && cmd && !cmd -> no_path)
+	else if (errno == 2 && cmd && !cmd -> no_path && !cmd -> inited)
 	{
 		ft_putstr_fd("bash: no such file or directory: ", 2);
 		ft_putstr_fd(cmd -> cmd, 2);
@@ -73,6 +76,18 @@ void	print_err_and_exit(char *str, t_cmd *cmd, t_data *info, int type)
 	{
 		ft_putstr_fd(str, 2);
 		ft_putchar_fd('\n', 2);
+	}
+}
+
+void	print_err_and_exit(char *str, t_cmd *cmd, t_data *info, int type)
+{
+	print_err(str, cmd, type);
+	if (cmd && cmd -> inited)
+	{
+		if (close(cmd -> info -> pipes[0]) < 0)
+		 perror("Error");
+		if (close(cmd -> info -> pipes[1]) < 0)
+		 perror("Error");
 	}
 	if (info -> doc_fd)
 		if (close(info -> doc_fd) < 0)

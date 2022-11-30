@@ -72,6 +72,9 @@ void	set_cmd(t_cmd *cmd, char *envp[])
 	cmd -> cmd = NULL;
 	cmd -> paths = NULL;
 	cmd -> envp = envp;
+	cmd -> inited = 0;
+	cmd -> read_end = 0;
+	cmd -> write_end = 0;
 }
 
 void	init_cmd(t_data *info, char **argv, int argc, char **envp)
