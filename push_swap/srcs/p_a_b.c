@@ -1,5 +1,19 @@
 #include "push.h"
 
+static void	update_list(t_node **stack)
+{
+	t_node	*ptr;
+
+
+	ptr = (*stack);
+	while (ptr)
+	{
+		ptr -> index = (ptr -> index) - 1;
+		ptr = ptr -> next;
+	}
+	(*stack) -> info -> lst_size -= 1;
+}
+
 static	void	delete_node(t_node **stack)
 {
 	t_node	*next;
@@ -15,6 +29,8 @@ static	void	delete_node(t_node **stack)
 	next -> prev = NULL;
 	(*stack) = next; 
 }
+
+
 
 static void    push_node_top(t_node **node, t_node **stack, char stack_n)
 {
@@ -36,13 +52,16 @@ static void    push_node_top(t_node **node, t_node **stack, char stack_n)
 		curr_n = (*node);
 		delete_node(node);
 		curr_n -> next = next_n;
-		next_n -> prev = (*stack);
 		(*stack) = curr_n;
+		next_n -> prev = (*stack);
 	}
 	if (stack_n == 'a')
 		ft_putendl_fd("pa", 1);
 	else
+	{
 		ft_putendl_fd("pb", 1);
+		update_list(node);
+	}
 }
 
 void    p_a_b(t_node **a, t_node **b, char stack_n)

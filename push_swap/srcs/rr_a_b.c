@@ -27,7 +27,7 @@ static void    switch_last_first_both(t_node **a, t_node **b)
 
 void    rr_a_b(t_node **a, t_node **b, char stack, int both)
 {
-    if (stack == 'a' && (*a) && ((*a )-> next) && !both)
+    if (stack == 'a' && (*a) && ((*a) -> next) && !both)
         switch_last_to_first(a, 'a');
     else if (stack == 'b' && (*b) && ((*b) -> next) && !both)
         switch_last_to_first(b, 'b');
