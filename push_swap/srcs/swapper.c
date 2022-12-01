@@ -1,9 +1,23 @@
 #include "push.h"
 
-// void    lets_push(t_info *info)
-// {
+void    lets_push(t_info *info)
+{
+    t_node  **a;
+    t_node  **b;
 
-// }
+    a = &info -> a;
+    b = &info -> b;
+
+    while ((info -> rb--) > 0)
+        r_a_b(a, b, 'b', 0);
+    while ((info -> rrb--) > 0)
+        r_a_b(a, b, 'b', 0);
+    while ((info -> rra--) > 0)
+        r_a_b(a, b, 'a', 0);
+    while ((info -> ra--) > 0)
+        r_a_b(a, b, 'a', 0);
+    p_a_b(a, b, 'b');
+}
 
 void    calcul_shortest(t_info *info, t_node *node)
 {
