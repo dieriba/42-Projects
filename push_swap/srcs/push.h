@@ -6,13 +6,33 @@
 #include "../libft/get_next_line/get_next_line.h"
 
 typedef struct t_node t_node;
+typedef struct t_info
+{
+    t_node  *a;
+    t_node  *b;
+    int     med;
+    int     ra;
+    int     rb;
+    int     rr;
+    int     rra;
+    int     rrb;
+    int     rrr;
+    int     pa;
+    int     pb;
+    int     sa;
+    int     sb;
+    int     ss;
+}   t_info;
+
 typedef struct t_node
 {
     int     num;
+    int     index;
     t_node  *next;
     t_node  *prev;
 }   t_node;
 
+void    init(t_info *info);
 void    free_all(t_node **a, t_node **b);
 int ft_lstsize_s(t_node **stack);
 t_node  *ft_lst_last_s(t_node *stack);

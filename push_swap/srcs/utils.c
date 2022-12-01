@@ -1,5 +1,23 @@
 #include "push.h"
 
+void    init(t_info *info)
+{
+    info -> a = 0;
+    info -> b = 0;
+    info -> med = 0;
+    info -> ra = -1;
+    info -> rb = -1;
+    info -> rr = -1;
+    info -> rra = -1;
+    info -> rrb = -1;
+    info -> rrr = -1;
+    info -> pa = -1;
+    info -> pb = -1;
+    info -> sa = -1;
+    info -> sb = -1;
+    info -> ss = -1;
+}
+
 void    free_all(t_node **a, t_node **b)
 {
     t_node  *last_a;
