@@ -1,5 +1,20 @@
 #include "push.h"
 
+static void     update_list(t_node **stack)
+{
+    t_node  *node;
+    int     lst_size;
+
+    lst_size = ft_lstsize_s((*stack));
+    node = (*stack);
+    while (node -> next)
+    {
+        node -> index -= 1;
+        node = node -> next;
+    }
+    node -> index = lst_size;
+}
+
 static void    switch_first_to_last(t_node **stack, char stack_n)
 {
     t_node  *last;
@@ -13,15 +28,23 @@ static void    switch_first_to_last(t_node **stack, char stack_n)
     first -> next -> prev = NULL;
     first -> next = NULL;
     if (stack_n == 'a')
+    {
         ft_putendl_fd("ra", 1);
+        update_list(stack);
+    }
     else if (stack_n == 'b')
+    {
         ft_putendl_fd("rb", 1);
+        update_list(stack);
+    }
 }
 
 static void    switch_first_last_both(t_node **a, t_node **b)
 {
     switch_first_to_last(a, 0);
+    update_list(a);
     switch_first_to_last(b, 0);
+    update_list(b);
     ft_putendl_fd("rr", 1);
 }
 

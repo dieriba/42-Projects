@@ -4,7 +4,6 @@ void    init(t_info *info)
 {
     info -> a = 0;
     info -> b = 0;
-    info -> med = 0;
     info -> ra = -1;
     info -> rb = -1;
     info -> rr = -1;
@@ -13,6 +12,12 @@ void    init(t_info *info)
     info -> rrr = -1;
     info -> pa = -1;
     info -> pb = -1;
+    info -> a_min = 0;
+    info -> a_max = 0;
+    info -> b_min = 0;
+    info -> b_max = 0;
+    info -> lst_size_a = 0;
+    info -> lst_size_b = 0;
 }
 
 void    free_all(t_node **a, t_node **b)
@@ -36,21 +41,6 @@ void    free_all(t_node **a, t_node **b)
         (*b) = NULL;
         (*b) = tmp_b;
     }
-}
-
-int ft_lstsize_s(t_node *stack)
-{
-    int i;
-
-    if (!(stack))
-        return (0);
-    i = 0;
-    while (stack)
-    {
-        stack = stack -> next;
-        ++i;
-    }
-    return (i);
 }
 
 t_node  *ft_lst_last_s(t_node *stack)

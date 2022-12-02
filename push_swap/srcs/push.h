@@ -11,8 +11,11 @@ typedef struct t_info
     t_node  *a;
     t_node  *b;
     int     b_max;
-    int     lst_size;
-    int     med;
+    int     b_min;
+    int     a_max;
+    int     a_min;
+    int     lst_size_a;
+    int     lst_size_b;
     int     ra;
     int     rb;
     int     rr;
@@ -22,6 +25,10 @@ typedef struct t_info
     int     pa;
     int     pb;
     int     argc;
+    int     tmp_ra;
+    int     tmp_rb;
+    int     tmp_rra;
+    int     tmp_rrb;
 }   t_info;
 
 typedef struct t_node
@@ -33,6 +40,10 @@ typedef struct t_node
     t_node  *prev;
 }   t_node;
 
+void    set_rr(t_info *info);
+void    set_rrr(t_info *info);
+void    choose_node(t_info *info);
+void    find_new_extremum(t_info *info, t_node **a, t_node **b);
 void    swapper(t_info *info);
 void    init(t_info *info);
 void    free_all(t_node **a, t_node **b);

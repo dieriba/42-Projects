@@ -51,36 +51,29 @@ int main (int argc, char **argv)
 
     t_node  *node;
     t_info  info;
+    int     num;
     init(&info);
     info.argc = argc;
+    info.a_max = ft_atoi(argv[1]);
+    info.a_min = ft_atoi(argv[1]);
     while (--argc > 0)
     {
+        num = ft_atoi(argv[argc]);
+        if (num > info.a_max)
+            info.a_max = num;
+        else if (num < info.a_min)
+            info.a_min = num;
         node = create_node(ft_atoi(argv[argc]), &info, --info.argc);
         if (!node)
             return (1);
         ft_lst_add_front_s(&info.a, node);
     }
-    info.lst_size = ft_lstsize_s(info.a);
-    // switch_index(&info.a);
-    // ft_printf("Lst size :%d\n", info.lst_size);
+    info.lst_size_a = ft_lstsize_s(info.a);
     p_a_b(&info.a, &info.b, 'b');
+    info.b_min = info.b -> num;
+    info.b_max = info.b -> num;
     p_a_b(&info.a, &info.b, 'b');
-    p_a_b(&info.a, &info.b, 'b');
-    p_a_b(&info.a, &info.b, 'b');
-    p_a_b(&info.a, &info.b, 'b');
-    // print_index(&info.a);
-    // print_stack(&info.a, 'a');
-    ft_printf("\n");
-    // print_stack(&info.b, 'b');
     swapper(&info);
-    // print_stack(&info.b, 'b');
-    // r_a_b(&info.a, &info.b, 'b', 1);
-    // r_a_b(&info.a, &info.b, 'b', 1);
-    // r_a_b(&info.a, &info.b, 'b', 1);
-
-    // ft_printf("\n");
-    // print_stack(&info.a, 'a');
-    // ft_printf("\n");
-    // print_stack(&info.b, 'b');
+    print_stack(&info.a, 'b');
     free_all(&info.a, &info.b);
 }
