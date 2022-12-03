@@ -43,9 +43,9 @@ void    lets_push(t_info *info)
 	while ((info -> rb--) > 0)
 		r_a_b(a, b, 'b', 0);
 	while ((info -> rrb--) > 0)
-		r_a_b(a, b, 'b', 0);
+		rr_a_b(a, b, 'b', 0);
 	while ((info -> rra--) > 0)
-		r_a_b(a, b, 'a', 0);
+		rr_a_b(a, b, 'a', 0);
 	while ((info -> ra--) > 0)
 		r_a_b(a, b, 'a', 0);
 	p_a_b(a, b, 'b');
@@ -80,12 +80,6 @@ t_node    *set_rb_pos(t_info *info, t_node *node)
 	}
 	if (node == tmp)
 		tmp = find_max(info);
-	ft_printf("After some calculation : the node with the value : %d, should be placed over the node b with the value : %d\n", node -> num, tmp -> num);
-	ft_printf("\n");
-	print_stack(&info -> a, 'a');
-	ft_printf("\n");
-	ft_printf("\n");
-	print_stack(&info -> b, 'b');
 	return (tmp);
 }
 
