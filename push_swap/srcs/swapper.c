@@ -14,43 +14,6 @@ t_node    *find_max(t_info *info)
 	return (b);
 }
 
-void    lets_push(t_info *info)
-{
-	t_node  **a;
-	t_node  **b;
-
-	a = &info -> a;
-	b = &info -> b;
-	
-	if (info -> rb + info -> ra <= info -> rrb + info -> rra)
-	{
-		info -> rrb = -1;
-		info -> rra = -1;
-	}
-	else
-	{
-		info -> ra = -1;
-		info -> rb = -1;
-	}
-	if (info -> ra > 0 && info -> rb > 0)
-		set_rr(info);
-	if (info -> rra > 0 && info -> rrb)
-		set_rrr(info);
-	while ((info -> rr--) > 0)
-		r_a_b(a, b, 'b', 1);
-	while ((info -> rrr--) > 0)
-		rr_a_b(a, b, 'b', 1);
-	while ((info -> rb--) > 0)
-		r_a_b(a, b, 'b', 0);
-	while ((info -> rrb--) > 0)
-		rr_a_b(a, b, 'b', 0);
-	while ((info -> rra--) > 0)
-		rr_a_b(a, b, 'a', 0);
-	while ((info -> ra--) > 0)
-		r_a_b(a, b, 'a', 0);
-	p_a_b(a, b, 'b');
-}
-
 t_node    *set_rb_pos(t_info *info, t_node *node)
 {
 	t_node  *b;
@@ -104,20 +67,25 @@ void    swapper(t_info *info)
 	t_node  *node;
 
 	node = info -> a;
-	while (1)
-	{
-		while (node)
+	if (info -> lst_size_a > 3)
+		while (1)
 		{
-			find_best_combo(info, node);
-			node = node -> next;
+			while (node)
+			{
+				find_best_combo(info, node);
+				node = node -> next;
+			}
+			lets_push(info, 'b');
+			node = info -> a;
+			info -> ra = -1;
+			info -> rb = -1;
+			info -> rra = -1;
+			info -> rrb = -1;
+			if (info -> lst_size_a == 3)
+				break ;
 		}
-		lets_push(info);
-		node = info -> a;
-		info -> ra = -1;
-		info -> rb = -1;
-		info -> rra = -1;
-		info -> rrb = -1;
-		if (info -> lst_size_a == 3)
-			break ;
-	}
+	// if (info -> lst_size_a == 3)
+	// 	sort_these_tree(&info -> a);
+	// if (info -> b)
+	// 	back_to_home(info);
 }

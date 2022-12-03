@@ -6,7 +6,8 @@ SRCS		=	./srcs/p_a_b.c \
 				./srcs/swap.c \
 				./srcs/swapper.c \
 				./srcs/utils_2.c \
-				./srcs/utils_3.c
+				./srcs/utils_3.c \
+				./srcs/utils_4.c
 
 OBJS		= 	$(SRCS:.c=.o)
 

@@ -40,6 +40,9 @@ typedef struct t_node
     t_node  *prev;
 }   t_node;
 
+// void    sort_these_tree(t_stack **a);
+// void    back_to_home(t_info *info);
+void    lets_push(t_info *info, char name);
 void    print_stack(t_node **stack, char name);
 void    set_rr(t_info *info);
 void    set_rrr(t_info *info);

@@ -4,7 +4,8 @@ static void	update_list(t_node **stack, char name)
 {
 	t_node	*ptr;
 
-
+	if (!(*stack))
+		return ;
 	ptr = (*stack);
 	while (ptr)
 	{
