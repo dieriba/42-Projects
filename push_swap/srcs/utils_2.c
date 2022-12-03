@@ -3,10 +3,18 @@
 void    find_new_extremum(t_info *info, t_node **a, t_node **b)
 {
     t_node  *node;
+	int		flags;
 
+	flags = 0;
     node = (*a);
     while (node)
     {
+		if (!flags)
+		{
+			info -> a_max = node -> num;
+			info -> a_min = node -> num;
+			flags = 1;
+		}
         if (info -> a_min > node -> num)
             info -> a_min = node -> num;
         else if (info -> a_max < node -> num)
@@ -16,6 +24,12 @@ void    find_new_extremum(t_info *info, t_node **a, t_node **b)
     node = (*b);
     while (node)
     {
+		if (!flags)
+		{
+			info -> b_max = node -> num;
+			info -> b_min = node -> num;
+			flags = 1;
+		}
         if (info -> b_min > node -> num)
             info -> b_min = node -> num;
         else if (info -> b_max < node -> num)

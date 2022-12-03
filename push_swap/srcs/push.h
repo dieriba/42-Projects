@@ -40,14 +40,16 @@ typedef struct t_node
     t_node  *prev;
 }   t_node;
 
-// void    sort_these_tree(t_stack **a);
-// void    back_to_home(t_info *info);
+void    sort_these_three(t_node **a);
+void    back_to_home(t_info *info);
+void    go_to_b(t_info *info);
 void    lets_push(t_info *info, char name);
 void    print_stack(t_node **stack, char name);
 void    set_rr(t_info *info);
 void    set_rrr(t_info *info);
 void    choose_node(t_info *info);
 void    find_new_extremum(t_info *info, t_node **a, t_node **b);
+t_node    *find_max(t_info *info, char name);
 void    swapper(t_info *info);
 void    init(t_info *info);
 void    free_all(t_node **a, t_node **b);

@@ -22,6 +22,8 @@ static void    switch_first_to_last(t_node **stack, char stack_n)
 
     first = *stack;
     last = ft_lst_last_s((*stack));
+    if (first == last)
+        return ;
     last -> next = first;
     first -> prev = last;
     (*stack) = first -> next;
@@ -42,9 +44,11 @@ static void    switch_first_to_last(t_node **stack, char stack_n)
 static void    switch_first_last_both(t_node **a, t_node **b)
 {
     switch_first_to_last(a, 0);
-    update_list(a);
+    if ((*a) && (*a) -> next)
+        update_list(a);
     switch_first_to_last(b, 0);
-    update_list(b);
+    if ((*b) && (*b) -> next)
+        update_list(b);
     ft_putendl_fd("rr", 1);
 }
 
@@ -54,6 +58,6 @@ void    r_a_b(t_node **a, t_node **b, char stack, int both)
         switch_first_to_last(a, 'a');
     else if (stack == 'b' && ((*b) && ((*b) -> next)) && !both)
         switch_first_to_last(b, 'b');
-    else if (both && ((*a) && ((*a) -> next)) && ((*b) && ((*b) -> next)))
+    else if (both && (((*a) && ((*a) -> next)) || ((*b) && ((*b) -> next))))
         switch_first_last_both(a, b);
 }
