@@ -67,13 +67,25 @@ t_node    *set_rb_pos(t_info *info, t_node *node)
 			tmp = b;
 			flags = 1;
 		}
+		else if (node -> num == b -> num)
+		{
+			tmp = b;
+			break ;
+		}
 		if (flags && (node -> num > b-> num) 
-			&& (tmp -> num < b -> num))
+			&& (tmp -> num != b -> num) && 
+			(tmp -> num < b -> num ))
 			tmp = b;
 		b = b -> next;
 	}
 	if (node == tmp)
 		tmp = find_max(info);
+	ft_printf("After some calculation : the node with the value : %d, should be placed over the node b with the value : %d\n", node -> num, tmp -> num);
+	ft_printf("\n");
+	print_stack(&info -> a, 'a');
+	ft_printf("\n");
+	ft_printf("\n");
+	print_stack(&info -> b, 'b');
 	return (tmp);
 }
 
@@ -96,9 +108,7 @@ void    find_best_combo(t_info *info, t_node *node)
 void    swapper(t_info *info)
 {
 	t_node  *node;
-	t_node  *tmp;
 
-	tmp = info -> a;
 	node = info -> a;
 	while (1)
 	{
@@ -113,7 +123,7 @@ void    swapper(t_info *info)
 		info -> rb = -1;
 		info -> rra = -1;
 		info -> rrb = -1;
-		if (!info -> a)
+		if (info -> lst_size_a == 3)
 			break ;
 	}
 }

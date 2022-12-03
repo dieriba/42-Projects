@@ -40,6 +40,7 @@ typedef struct t_node
     t_node  *prev;
 }   t_node;
 
+void    print_stack(t_node **stack, char name);
 void    set_rr(t_info *info);
 void    set_rrr(t_info *info);
 void    choose_node(t_info *info);

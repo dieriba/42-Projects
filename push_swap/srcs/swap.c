@@ -1,22 +1,6 @@
 #include "push.h"
 
-void    print_stack(t_node **stack, char name)
-{
-    t_node  *node;
 
-    node = *stack;
-    if (!node)
-        ft_printf("Empty list");
-    if (name == 'a')
-        ft_printf("----------STACK A----------\n");
-    else
-        ft_printf("----------STACK B----------\n");
-    while (node)
-    {
-        ft_printf("-------------%d-------------\n", node -> num);
-        node = node -> next;
-    }
-}
 
 void    print_index(t_node **stack)
 {
@@ -73,7 +57,16 @@ int main (int argc, char **argv)
     info.b_min = info.b -> num;
     info.b_max = info.b -> num;
     p_a_b(&info.a, &info.b, 'b');
+    // print_stack(&info.b, 'b');
+    // ft_printf("\n");
+    // ft_printf("\n");
+    // print_stack(&info.a, 'a');
     swapper(&info);
-    print_stack(&info.a, 'b');
+    // print_stack(&info.b, 'b');
+    // print_index(&info.a);
+    // ft_printf("\n");
+    // print_index(&info.b);
+    // ft_printf("\n");
+    // print_stack(&info.a, 'a');
     free_all(&info.a, &info.b);
 }

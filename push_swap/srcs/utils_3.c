@@ -15,3 +15,21 @@ void    choose_node(t_info *info)
 			info -> rrb = info -> tmp_rrb;
 		}
 }
+
+void    print_stack(t_node **stack, char name)
+{
+    t_node  *node;
+
+    node = *stack;
+    if (!node)
+        ft_printf("Empty list");
+    if (name == 'a')
+        ft_printf("\tSTACK A\t\n");
+    else
+        ft_printf("\tSTACK B\t\n");
+    while (node)
+    {
+        ft_printf("\t%d\t\n", node -> num);
+        node = node -> next;
+    }
+}
