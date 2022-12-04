@@ -12,6 +12,7 @@ void    init(t_info *info)
     info -> rrr = -1;
     info -> pa = -1;
     info -> pb = -1;
+    info -> better_opt = -1;
     info -> a_min = 0;
     info -> a_max = 0;
     info -> b_min = 0;

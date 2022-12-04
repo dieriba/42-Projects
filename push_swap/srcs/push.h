@@ -29,6 +29,8 @@ typedef struct t_info
     int     tmp_rb;
     int     tmp_rra;
     int     tmp_rrb;
+    int     better_opt;
+    int     tmp_better_opt;
 }   t_info;
 
 typedef struct t_node

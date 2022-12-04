@@ -56,8 +56,7 @@ int main (int argc, char **argv)
     p_a_b(&info.a, &info.b, 'b');
     info.b_min = info.b -> num;
     info.b_max = info.b -> num;
-    p_a_b(&info.a, &info.b, 'b');
+    // p_a_b(&info.a, &info.b, 'b');
     swapper(&info);
-    print_stack(&info.a, 'a');
     free_all(&info.a, &info.b);
 }

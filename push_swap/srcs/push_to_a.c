@@ -46,7 +46,11 @@ static void    find_best_combo(t_info *info, t_node *node)
 	res = set_ra_pos(info, node);
 	info -> ra = (res -> index) - 1;
 	info -> rra = info -> lst_size_a - res -> index + 1;
+    ft_printf("After some calculations we found that the node : %d should be placed over : %d\n", node -> num, res -> num);
+    ft_printf("Calcul : rra : %d ,rrb : %d ,ra : %d ,rb : %d ,rra + rrb : %d ,ra + rb : %d ,rra + rb : %d ,rrb + ra : %d", info -> rra, info -> rrb, info -> ra, info -> rb
+    ,info -> rra + info -> rrb, info -> ra + info -> rb,  info -> rra + info -> rb, info -> rrb + info -> ra);
 	choose_node(info);
+    print_stack(&info -> b, 'b');
 }
 
 void    back_to_home(t_info *info)
