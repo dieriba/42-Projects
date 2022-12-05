@@ -21,7 +21,7 @@ CC			=	cc
 
 CFLAGS		=	-Wall -Wextra -Werror -MMD
 
-SWAP		=	swap
+SWAP		=	push_swap
 
 all:			$(SWAP)
 

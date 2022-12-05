@@ -63,8 +63,8 @@ void    go_to_b(t_info *info)
 		info -> tmp_better_opt = -1;
 		lets_push(info, 'b');
 		node = info -> a;
-		info -> better_opt = -1;
-		if (node -> info -> lst_size_a == 3)
+		if (!node)
 			break ;
+		info -> better_opt = -1;
 	}
 }

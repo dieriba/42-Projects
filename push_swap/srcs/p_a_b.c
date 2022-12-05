@@ -95,6 +95,8 @@ void    p_a_b(t_node **a, t_node **b, char stack_n)
 		push_node_top(b, a, stack_n);
 	else if (stack_n == 'b' && (*a))
 		push_node_top(a, b, stack_n);
-	find_new_extremum_b((*a) -> info, b);
-	find_new_extremum_a((*a) -> info, a);
+	if ((*b))
+		find_new_extremum_b((*b) -> info, b);
+	if ((*a))
+		find_new_extremum_a((*a) -> info, a);
 }

@@ -29,6 +29,8 @@ int		sorted(t_node **stack)
     t_node	*node;
     int		cmp;
 
+    if (!(*stack))
+        return (0);
     cmp = (*stack) -> info -> a -> num;
     node = (*stack)-> next;
     while (node)
@@ -97,9 +99,5 @@ int main (int argc, char **argv)
         return (0);
     }
     swapper(&info);
-    if (sorted(&info.a))
-        ft_printf("List sorted !\n");
-    else
-        print_stack(&info.a, 'a');
     free_all(&info.a, &info.b);
 }

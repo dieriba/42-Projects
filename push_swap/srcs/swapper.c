@@ -30,18 +30,38 @@ void	ascending_list(t_node **a)
 	}
 }
 
+static void	descending_list(t_info *info)
+{
+	t_node	*node;
+	t_node	**a;
+	t_node	**b;
+	int		rotate;
+
+	a = &info -> a;
+	b = &info -> b;
+	node = find_max(info, 'b');
+	rotate = node -> index;
+	while (rotate != 1)
+	{
+		r_a_b(a, b, 'b', 0);
+		rotate = node -> index;
+	}
+}
+
 void	swapper(t_info *info)
 {
+	t_node	*b;
+
 	p_a_b(&info -> a, &info -> b, 'b');
 	info -> b_min = info -> b -> num;
 	info -> b_max = info -> b -> num;
 	p_a_b(&info -> a, &info -> b, 'b');
 	go_to_b(info);
-	if (info -> lst_size_a == 3)
-		sort_these_three(&info -> a);
-	if (info -> b)
+	descending_list(info);
+	b = info -> b;
+	while (b)
 	{
-		back_to_home(info);
-		ascending_list(&info -> a);
+		p_a_b(&info -> a, &info -> b, 'a');
+		b = info -> b;
 	}
 }

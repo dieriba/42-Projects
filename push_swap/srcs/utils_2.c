@@ -24,6 +24,8 @@ void    find_new_extremum_a(t_info *info, t_node **a)
     t_node  *node;
 
     node = (*a);
+	if (!node)
+		return ;
 	info -> a_max = node -> num;
 	info -> a_min = node -> num;
     while (node)
