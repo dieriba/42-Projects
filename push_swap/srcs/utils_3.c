@@ -41,7 +41,6 @@ void    choose_node(t_info *info)
         info -> rra = info -> tmp_rra;
         info -> rrb = info -> tmp_rrb;
 	    info -> better_opt = info -> tmp_better_opt;
-        // ft_printf("Best node : rra: %d rrb: %d ra: %d rb :%d\n", info -> rra, info -> rrb, info -> ra, info -> rb);
     }
 }
 

@@ -16,6 +16,23 @@
 //     return (1);
 // }
 
+int    sorted(t_node **stack)
+{
+    t_node  *node;
+    int     cmp;
+
+    cmp = (*stack) -> info -> a -> num;
+    node = (*stack)-> next;
+    while (node)
+    {
+        if (cmp > node -> num)
+            return (0);
+        cmp = node -> num;
+        node = node -> next;
+    }
+    return (1);
+}
+
 int    create_list(int argc, char **argv, t_info *info)
 {
     int num;
@@ -56,7 +73,11 @@ int main (int argc, char **argv)
     p_a_b(&info.a, &info.b, 'b');
     info.b_min = info.b -> num;
     info.b_max = info.b -> num;
-    // p_a_b(&info.a, &info.b, 'b');
+    p_a_b(&info.a, &info.b, 'b');
     swapper(&info);
+    // print_stack(&info.a, 'a');
+    if (sorted(&info.a))
+        ft_printf("List sorted !\n");
+    // print_stack(&info.b, 'b');
     free_all(&info.a, &info.b);
 }
