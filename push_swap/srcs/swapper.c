@@ -30,9 +30,12 @@ void	ascending_list(t_node **a)
 	}
 }
 
-
-void    swapper(t_info *info)
+void	swapper(t_info *info)
 {
+	p_a_b(&info -> a, &info -> b, 'b');
+	info -> b_min = info -> b -> num;
+	info -> b_max = info -> b -> num;
+	p_a_b(&info -> a, &info -> b, 'b');
 	go_to_b(info);
 	if (info -> lst_size_a == 3)
 		sort_these_three(&info -> a);

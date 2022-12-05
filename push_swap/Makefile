@@ -2,12 +2,13 @@ SRCS		=	./srcs/p_a_b.c \
 				./srcs/r_a_b.c \
 				./srcs/rr_a_b.c \
 				./srcs/s_a_b.c \
-				./srcs/utils.c \
 				./srcs/swap.c \
 				./srcs/swapper.c \
+				./srcs/utils_1.c \
 				./srcs/utils_2.c \
 				./srcs/utils_3.c \
 				./srcs/utils_4.c \
+				./srcs/utils_5.c \
 				./srcs/push_to_a.c \
 				./srcs/push_to_b.c \
 				./srcs/sort_these_three.c

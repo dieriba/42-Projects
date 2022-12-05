@@ -22,10 +22,10 @@ static void	swap_both_first_t_node(t_node *a, t_node *a_next, t_node *b, t_node 
 
 void	s_a_b(t_node **a, t_node **b, char stack, int both)
 {
-	if (stack == 'a' && ((*a) && ((*a) -> next)) && !both)
-		swap_two_f_elems((*a), ((*a) -> next), 'a');
-	else if (stack == 'b' && ((*b) && ((*b) -> next)) && !both)
-		swap_two_f_elems((*b), ((*b) -> next), 'b');
-	else if (both && ((*a) && (*a) -> next) && ((*b) && (*b) -> next))
-		swap_both_first_t_node((*a), (*a) -> next, (*b), (*b) -> next);
+	if (stack == 'a' && ((*a) && ((*a)-> next)) && !both)
+		swap_two_f_elems((*a), ((*a)-> next), 'a');
+	else if (stack == 'b' && ((*b) && ((*b)-> next)) && !both)
+		swap_two_f_elems((*b), ((*b)-> next), 'b');
+	else if (both && ((*a) && (*a)-> next) && ((*b) && (*b)-> next))
+		swap_both_first_t_node((*a), (*a)-> next, (*b), (*b)-> next);
 }

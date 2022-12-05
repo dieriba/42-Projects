@@ -13,9 +13,9 @@ static void	update_list(t_node **stack, char name)
 		ptr = ptr -> next;
 	}
 	if (name == 'a')
-		(*stack) -> info -> lst_size_a -= 1;
+		(*stack)-> info -> lst_size_a -= 1;
 	else
-		(*stack) -> info -> lst_size_b -= 1;
+		(*stack)-> info -> lst_size_b -= 1;
 }
 
 static	void	delete_node(t_node **stack)
@@ -43,8 +43,7 @@ static	void	update_stack(t_node **stack, char name)
 	b = (*stack);
 	while (b)
 	{
-		++index;
-		b -> index = index;
+		b -> index = ++index;
 		b = b -> next;
 	}
 	if (name == 'a')
@@ -84,10 +83,6 @@ static void    push_node_top(t_node **node, t_node **stack, char stack_n)
 	}
 	else
 	{
-		if ((*stack) -> num > (*stack) -> info -> b_max)
-			(*stack) -> info -> b_max = (*stack) -> num;
-		else if ((*stack) -> num < (*stack) -> info -> b_min)
-			(*stack) -> info -> b_min = (*stack) -> num;
 		ft_putendl_fd("pb", 1);
 		update_list(node, 'a');
 		update_stack(stack, 'b');
@@ -100,5 +95,6 @@ void    p_a_b(t_node **a, t_node **b, char stack_n)
 		push_node_top(b, a, stack_n);
 	else if (stack_n == 'b' && (*a))
 		push_node_top(a, b, stack_n);
-	find_new_extremum((*a) -> info, a, b);
+	find_new_extremum_b((*a) -> info, b);
+	find_new_extremum_a((*a) -> info, a);
 }

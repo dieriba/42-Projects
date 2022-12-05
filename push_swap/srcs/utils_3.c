@@ -1,21 +1,8 @@
 #include "push.h"
 
-int     who_smallest(int first, int second, int third, int fourth)
+int     who_smallest(t_info *info)
 {
     int min;
-
-    min = first;
-    if (second < min)
-        min = second;
-    if (third < min)
-        min = third;
-    if (fourth < min)
-        min = fourth;
-    return (min);
-}
-
-void    choose_node(t_info *info)
-{
     int ra_rb;
     int rra_rrb;
     int rra_rb;
@@ -25,7 +12,19 @@ void    choose_node(t_info *info)
     rra_rrb = info -> tmp_rra + info -> tmp_rrb;
     rrb_ra = info -> tmp_rrb + info -> tmp_ra;
     rra_rb = info -> tmp_rra + info -> tmp_rb;
-    info -> tmp_better_opt = who_smallest(rra_rrb, ra_rb, rra_rb, rrb_ra);
+    min = ra_rb;
+    if (rra_rrb < min)
+        min = rra_rrb;
+    if (rrb_ra < min)
+        min = rrb_ra;
+    if (rra_rb < min)
+        min = rra_rb;
+    return (min);
+}
+
+void    choose_node(t_info *info)
+{ 
+    info -> tmp_better_opt = who_smallest(info);
     if (info -> better_opt == -1)
     {   
         info -> better_opt = info -> tmp_better_opt;

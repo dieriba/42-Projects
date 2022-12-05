@@ -55,7 +55,6 @@ void	select_best(t_info *info)
 		info -> rb = -1;
 		info -> rra = -1;
 	}
-	// ft_printf("Before calc ra_rb : %d, rra_rrb : %d, rra_rb : %d, rrb_ra : %d rra : %d\n", ra_rb, rra_rrb, rra_rb, rrb_ra, info -> rra);
 }
 
 void    actions(t_info *info, t_node **a, t_node **b, char name)
@@ -81,12 +80,10 @@ void    actions(t_info *info, t_node **a, t_node **b, char name)
 void    lets_push(t_info *info, char name)
 {
 	select_best(info);
-	// ft_printf("Before ra : %d rb : %d rrb %d rra : %d\n", info -> ra, info -> rb, info -> rrb, info -> rra);
 	if ((info -> ra > 0 && info -> rb > 0))
 		set_rr(info);
 	if ((info -> rra > 0 && info -> rrb > 0))
 		set_rrr(info);
-	// ft_printf("Before ra : %d rb : %d rrb %d rra : %d\n", info -> ra, info -> rb, info -> rrb, info -> rra);
     actions(info, &info -> a, &info -> b, name);
 }
 

@@ -24,8 +24,7 @@ static t_node    *set_ra_pos(t_info *info, t_node *node)
 
 	flags = 0;
 	a = info -> a;
-	tmp = node;
-        
+	tmp = node;      
 	while (a)
 	{
 		if (node -> num < a -> num && !flags)
@@ -43,10 +42,6 @@ static t_node    *set_ra_pos(t_info *info, t_node *node)
 			tmp = a;
 		a = a -> next;
 	}
-	if (node == tmp)
-		tmp = find_max(info, 'a');
-	if (tmp -> num < node -> num)
-		tmp = find_min(info);
 	return (tmp);
 }
 
@@ -57,15 +52,13 @@ static void    find_best_combo(t_info *info, t_node *node)
 	info -> tmp_rb = node -> index - 1;
 	info -> tmp_rrb = info -> lst_size_b - node -> index + 1;
 	res = set_ra_pos(info, node);
+	if (node == res)
+		res = find_max(info, 'a');
+	if (res -> num < node -> num)
+		res = find_min(info);
 	info -> tmp_ra = (res -> index) - 1;
 	info -> tmp_rra = info -> lst_size_a - res -> index + 1;
-    // ft_printf("After some calculations we found that the node : %d should be placed over : %d\n", node -> num, res -> num);
-    // ft_printf("Calcul : rra : %d ,rrb : %d ,ra : %d ,rb : %d ,rra + rrb : %d ,ra + rb : %d ,rra + rb : %d ,rrb + ra : %d\n", info -> tmp_rra, info -> tmp_rrb, info -> tmp_ra, info -> tmp_rb
-    // ,info -> tmp_rra + info -> tmp_rrb, info -> tmp_ra + info -> tmp_rb,  info -> tmp_rra + info -> tmp_rb, info -> tmp_rrb + info -> tmp_ra);
 	choose_node(info);
-    // print_stack(&info -> b, 'b');
-	// ft_printf("\n");
-    // print_stack(&info -> a, 'a');
 }
 
 void    back_to_home(t_info *info)
@@ -80,8 +73,6 @@ void    back_to_home(t_info *info)
 			find_best_combo(info, node);
 			node = node -> next;
 		}
-	// 	ft_printf("the final option Calcul : rra : %d ,rrb : %d ,ra : %d ,rb : %d ,rra + rrb : %d ,ra + rb : %d ,rra + rb : %d ,rrb + ra : %d\n", info -> rra, info -> rrb, info -> ra, info -> rb
-    // ,info -> rra + info -> rrb, info -> ra + info -> rb,  info -> rra + info -> rb, info -> rrb + info -> ra);
 		info -> tmp_ra = -1;
 		info -> tmp_rb = -1;
 		info -> tmp_rra = -1;

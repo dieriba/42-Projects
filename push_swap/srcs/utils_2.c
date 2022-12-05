@@ -1,35 +1,16 @@
 #include "push.h"
 
-void    find_new_extremum(t_info *info, t_node **a, t_node **b)
+void	find_new_extremum_b(t_info *info, t_node **b)
 {
-    t_node  *node;
-	int		flags;
+	t_node  *node;
 
-	flags = 0;
-    node = (*a);
+	node = (*b);
+	if (!node)
+		return ;
+	info -> b_max = node -> num;
+	info -> b_min = node -> num;
     while (node)
     {
-		if (!flags)
-		{
-			info -> a_max = node -> num;
-			info -> a_min = node -> num;
-			flags = 1;
-		}
-        if (info -> a_min > node -> num)
-            info -> a_min = node -> num;
-        else if (info -> a_max < node -> num)
-            info -> a_max = node -> num;
-        node = node -> next;
-    }
-    node = (*b);
-    while (node)
-    {
-		if (!flags)
-		{
-			info -> b_max = node -> num;
-			info -> b_min = node -> num;
-			flags = 1;
-		}
         if (info -> b_min > node -> num)
             info -> b_min = node -> num;
         else if (info -> b_max < node -> num)
@@ -38,19 +19,21 @@ void    find_new_extremum(t_info *info, t_node **a, t_node **b)
     }
 }
 
-int ft_lstsize_s(t_node *stack)
+void    find_new_extremum_a(t_info *info, t_node **a)
 {
-    int i;
+    t_node  *node;
 
-    if (!(stack))
-        return (0);
-    i = 0;
-    while (stack)
+    node = (*a);
+	info -> a_max = node -> num;
+	info -> a_min = node -> num;
+    while (node)
     {
-        stack = stack -> next;
-        ++i;
+        if (info -> a_min > node -> num)
+            info -> a_min = node -> num;
+        else if (info -> a_max < node -> num)
+            info -> a_max = node -> num;
+        node = node -> next;
     }
-    return (i);
 }
 
 void    set_rr(t_info *info)

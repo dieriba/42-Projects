@@ -5,6 +5,22 @@
 #include "../libft/ft_printf/ft_printf.h"
 #include "../libft/get_next_line/get_next_line.h"
 
+typedef struct t_bonus
+{
+    char    *rra;
+    char    *rrb;
+    char    *ra;
+    char    *rb;
+    char    *rrr;
+    char    *rr;
+    char    *pa;
+    char    *pb;
+    char    *sa;
+    char    *sb;
+    char    *ss;
+} t_bonus;
+
+
 typedef struct t_node t_node;
 typedef struct t_info
 {
@@ -50,10 +66,11 @@ void    print_stack(t_node **stack, char name);
 void    set_rr(t_info *info);
 void    set_rrr(t_info *info);
 void    choose_node(t_info *info);
-void    find_new_extremum(t_info *info, t_node **a, t_node **b);
+void    find_new_extremum_b(t_info *info, t_node **b);
+void    find_new_extremum_a(t_info *info, t_node **a);
 t_node    *find_max(t_info *info, char name);
 void    swapper(t_info *info);
-void    init(t_info *info);
+void    init(t_info *info, int argc, char **argv);
 void    free_all(t_node **a, t_node **b);
 int ft_lstsize_s(t_node *stack);
 t_node  *ft_lst_last_s(t_node *stack);
