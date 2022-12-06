@@ -9,6 +9,8 @@ int		check_args(int argc, char **argv)
     i = 0;
     while (++i < argc)
     {
+        if (argv[i][0] == '-' && !argv[i][1])
+            return (0);
         if (argv[i][0] == '-')
 			j++;
         while (argv[i][++j])
@@ -99,5 +101,7 @@ int main (int argc, char **argv)
         return (0);
     }
     swapper(&info);
+    if (sorted(&info.a))
+        ft_printf("List is Sorted\n");
     free_all(&info.a, &info.b);
 }

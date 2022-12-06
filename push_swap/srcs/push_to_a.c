@@ -73,10 +73,6 @@ void    back_to_home(t_info *info)
 			find_best_combo(info, node);
 			node = node -> next;
 		}
-		info -> tmp_ra = -1;
-		info -> tmp_rb = -1;
-		info -> tmp_rra = -1;
-		info -> tmp_rrb = -1;
 		info -> better_opt = -1;
 		lets_push(info, 'a');
 		node = info -> b;

@@ -19,7 +19,7 @@ void	case_three(t_node **a)
 
 void	case_four(t_node **a)
 {
-	s_a_b(a, 0, 'a', 0);
+	r_a_b(a, 0, 'a', 0);
 }
 
 void	sort_these_three(t_node **a)

@@ -32,7 +32,6 @@ void	select_best(t_info *info)
 	rra_rrb = info -> rra + info -> rrb;
 	rra_rb = info -> rra + info -> rb;
 	rrb_ra = info -> rrb + info -> ra;
-	// ft_printf("Before calc ra_rb : %d, rra_rrb : %d, rra_rb : %d, rrb_ra : %d rra : %d\n", ra_rb, rra_rrb, rra_rb, rrb_ra, info -> rra);
 	int	options[4] = {ra_rb, rra_rrb, rra_rb, rrb_ra};
 	min = find_small(options);
 	if (min == 0)

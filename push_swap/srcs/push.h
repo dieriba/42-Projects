@@ -47,6 +47,7 @@ typedef struct t_info
     int     tmp_rrb;
     int     better_opt;
     int     tmp_better_opt;
+    int     med;
 }   t_info;
 
 typedef struct t_node
@@ -58,6 +59,15 @@ typedef struct t_node
     t_node  *prev;
 }   t_node;
 
+int    find_med(t_node **a);
+int ft_lstsize_s(t_node *stack);
+
+t_node    *find_max(t_info *info, char name);
+t_node  *ft_lst_last_s(t_node *stack);
+t_node  *create_node(long int num, t_info *info, int argc);
+t_node  *ft_lst_add_front_s(t_node **node, t_node *new);
+
+void    sort_these_five(t_node **a, t_node **b);
 void    sort_these_three(t_node **a);
 void    back_to_home(t_info *info);
 void    go_to_b(t_info *info);
@@ -66,16 +76,13 @@ void    print_stack(t_node **stack, char name);
 void    set_rr(t_info *info);
 void    set_rrr(t_info *info);
 void    choose_node(t_info *info);
-void    find_new_extremum_b(t_info *info, t_node **b);
-void    find_new_extremum_a(t_info *info, t_node **a);
-t_node    *find_max(t_info *info, char name);
 void    swapper(t_info *info);
 void    init(t_info *info, int argc, char **argv);
 void    free_all(t_node **a, t_node **b);
-int ft_lstsize_s(t_node *stack);
-t_node  *ft_lst_last_s(t_node *stack);
-t_node  *create_node(long int num, t_info *info, int argc);
-t_node  *ft_lst_add_front_s(t_node **node, t_node *new);
+
+void    find_new_extremum_b(t_info *info, t_node **b);
+void    find_new_extremum_a(t_info *info, t_node **a);
+
 void    p_a_b(t_node **a, t_node **b, char stack_n);
 void    r_a_b(t_node **a, t_node **b, char stack, int both);
 void    rr_a_b(t_node **a, t_node **b, char stack, int both);
