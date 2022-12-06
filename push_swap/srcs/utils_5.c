@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_5.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/06 16:58:47 by dtoure            #+#    #+#             */
+/*   Updated: 2022/12/06 16:58:47 by dtoure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push.h"
 
-void    init(t_info *info, int argc, char **argv)
+void	init(t_info *info, int argc, char **argv)
 {
 	info -> a = 0;
 	info -> b = 0;
@@ -23,7 +35,7 @@ void    init(t_info *info, int argc, char **argv)
 	info -> a_min = ft_atoi(argv[1]);
 }
 
-void	free_all(t_node **a, t_node **b)
+int	free_all(t_node **a, t_node **b)
 {
 	t_node	*tmp_a;
 	t_node	*tmp_b;
@@ -44,6 +56,7 @@ void	free_all(t_node **a, t_node **b)
 		(*b) = NULL;
 		(*b) = tmp_b;
 	}
+	return (0);
 }
 
 void	sort_tab(t_info *info, int *tab)

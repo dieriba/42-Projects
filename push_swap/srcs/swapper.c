@@ -30,21 +30,32 @@ void	ascending_list(t_node **a)
 	}
 }
 
-void	swapper(t_info *info)
+int	swapper(t_info *info)
 {
-	if (info -> lst_size_a == 3)
+	if (info -> lst_size_a == 2)
+	{
+		if (info -> a -> num > info -> a -> next -> num)
+			s_a_b(&info -> a, &info -> b, 'a', 0);
+	}
+	else if (info -> lst_size_a == 3)
 		sort_these_three(&info -> a);
 	else if (info -> lst_size_a == 5)
 	{
 		sort_these_five(&info -> a, &info -> b);
-		back_to_home(info);
+		if (!back_to_home(info))
+			return (free_all(&info -> a, &info -> b));
 		ascending_list(&info -> a);
 	}
 	else
 	{
-		go_to_b(info);
+		if(!find_med(&info -> a))
+			return (free_all(&info -> a, &info -> b));
+		if(!go_to_b(info))
+			return (free_all(&info -> a, &info -> b));
 		sort_these_three(&info -> a);
-		back_to_home(info);
+		if (!back_to_home(info))
+			return (free_all(&info -> a, &info -> b));
 		ascending_list(&info -> a);
 	}
+	return (1);
 }

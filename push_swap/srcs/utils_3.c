@@ -1,5 +1,27 @@
 #include "push.h"
 
+t_node    *find_max(t_info *info, char name)
+{
+	t_node  *node;
+	int		max;
+
+	max = info -> a_max;
+	if (name == 'a')
+		node = info -> a;
+	else
+	{
+		node = info -> b;
+		max = info -> b_max;
+	}
+	while (node)
+	{
+		if (node -> num == max)
+			break;
+		node = node -> next;
+	}
+	return (node);
+}
+
 int     who_smallest(t_info *info)
 {
     int min;
@@ -59,4 +81,34 @@ void    print_stack(t_node **stack, char name)
         ft_printf("\t%d\t\n", node -> num);
         node = node -> next;
     }
+}
+
+void	setter(t_info *info, int min)
+{
+	if (min == 0)
+	{
+		info -> rra = -1;
+		info -> rrb = -1;
+	}
+	else if (min == 1)
+	{
+		info -> ra = -1;
+		info -> rb = -1;
+	}
+	else if (min == 2)
+	{
+		info -> ra = -1;
+		info -> rrb = -1;
+	}
+	else
+	{
+		info -> rb = -1;
+		info -> rra = -1;
+	}
+}
+
+int ft_error(char *error, int code)
+{
+    ft_putstr_fd(error, 2);
+    return (code);
 }

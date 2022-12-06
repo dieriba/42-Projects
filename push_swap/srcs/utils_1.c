@@ -1,6 +1,5 @@
 #include "push.h"
 
-
 int ft_lstsize_s(t_node *stack)
 {
     int i;

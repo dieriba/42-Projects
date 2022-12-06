@@ -71,8 +71,9 @@ int main (int argc, char **argv)
         free_all(&info.a, &info.b);
         return (0);
     }
-    swapper(&info);
-    if (sorted(&info.a))
-        ft_printf("List is Sorted\n");
+    if (!swapper(&info))
+        return (1);
+    // if (sorted(&info.a))
+    //     ft_printf("List is Sorted\n");
     free_all(&info.a, &info.b);
 }

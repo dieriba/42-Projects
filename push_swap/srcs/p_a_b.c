@@ -52,6 +52,22 @@ static	void	update_stack(t_node **stack, char name)
 		(*stack) -> info -> lst_size_b += 1;
 }
 
+void	update(char stack_n, t_node **node, t_node **stack)
+{
+	if (stack_n == 'a')
+	{
+		ft_putendl_fd("pa", 1);
+		update_list(node, 'b');
+		update_stack(stack, 'a');
+	}
+	else
+	{
+		ft_putendl_fd("pb", 1);
+		update_list(node, 'a');
+		update_stack(stack, 'b');
+	}
+}
+
 static void    push_node_top(t_node **node, t_node **stack, char stack_n)
 {
 	t_node	*next_n;
@@ -76,17 +92,9 @@ static void    push_node_top(t_node **node, t_node **stack, char stack_n)
 		next_n -> prev = (*stack);
 	}
 	if (stack_n == 'a')
-	{
-		ft_putendl_fd("pa", 1);
-		update_list(node, 'b');
-		update_stack(stack, 'a');
-	}
+		update('a', node, stack);
 	else
-	{
-		ft_putendl_fd("pb", 1);
-		update_list(node, 'a');
-		update_stack(stack, 'b');
-	}
+		update('b', node, stack);
 }
 
 void    p_a_b(t_node **a, t_node **b, char stack_n)

@@ -20,40 +20,34 @@ int 	find_small(int *options)
 	return (idx);
 }
 
-void	select_best(t_info *info)
+int		create_tab(int ra_rb, int rra_rrb, int rra_rb, int rrb_ra)
 {
-	int	ra_rb;
-	int	rra_rrb;
-	int rra_rb;
-	int	rrb_ra;
+	int	*tab;
 	int	min;
 
-	ra_rb = info -> ra + info -> rb;
-	rra_rrb = info -> rra + info -> rrb;
-	rra_rb = info -> rra + info -> rb;
-	rrb_ra = info -> rrb + info -> ra;
-	int	options[4] = {ra_rb, rra_rrb, rra_rb, rrb_ra};
-	min = find_small(options);
-	if (min == 0)
-	{
-		info -> rra = -1;
-		info -> rrb = -1;
-	}
-	else if (min == 1)
-	{
-		info -> ra = -1;
-		info -> rb = -1;
-	}
-	else if (min == 2)
-	{
-		info -> ra = -1;
-		info -> rrb = -1;
-	}
-	else
-	{
-		info -> rb = -1;
-		info -> rra = -1;
-	}
+	min = -1;
+	tab = malloc(sizeof(int) * 4);
+	if (!tab)
+		return (min);
+	tab[0] = ra_rb;
+	tab[1] = rra_rrb;
+	tab[2] = rra_rb;
+	tab[3] = rrb_ra;
+	min = find_small(tab);
+	free(tab);
+	return (min);
+}
+
+int	select_best(t_info *info)
+{
+	int	min;
+
+	min = create_tab(info -> ra + info -> rb, info -> rra + info -> rrb,
+	info -> rra + info -> rb, info -> rrb + info -> ra);
+	if (min == -1)
+		return (0);
+	setter(info, min);
+	return (1);
 }
 
 void    actions(t_info *info, t_node **a, t_node **b, char name)
@@ -76,34 +70,14 @@ void    actions(t_info *info, t_node **a, t_node **b, char name)
     	p_a_b(a, b, 'b');
 }
 
-void    lets_push(t_info *info, char name)
+int    lets_push(t_info *info, char name)
 {
-	select_best(info);
+	if (!select_best(info))
+		return (0);	
 	if ((info -> ra > 0 && info -> rb > 0))
 		set_rr(info);
 	if ((info -> rra > 0 && info -> rrb > 0))
 		set_rrr(info);
     actions(info, &info -> a, &info -> b, name);
-}
-
-t_node    *find_max(t_info *info, char name)
-{
-	t_node  *node;
-	int		max;
-
-	max = info -> a_max;
-	if (name == 'a')
-		node = info -> a;
-	else
-	{
-		node = info -> b;
-		max = info -> b_max;
-	}
-	while (node)
-	{
-		if (node -> num == max)
-			break;
-		node = node -> next;
-	}
-	return (node);
+	return (1);
 }

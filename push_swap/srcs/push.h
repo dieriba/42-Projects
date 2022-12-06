@@ -64,24 +64,26 @@ typedef struct t_node
 int    find_med(t_node **a);
 int     ft_lstsize_s(t_node *stack);
 int     check(int argc, char **argv);
+int    free_all(t_node **a, t_node **b);
+int    go_to_b(t_info *info);
+int    swapper(t_info *info);
+int    lets_push(t_info *info, char name);
+int    back_to_home(t_info *info);
+int ft_error(char *error, int code);
 
 t_node    *find_max(t_info *info, char name);
 t_node  *ft_lst_last_s(t_node *stack);
 t_node  *create_node(long int num, t_info *info, int argc);
 t_node  *ft_lst_add_front_s(t_node **node, t_node *new);
 
+void	setter(t_info *info, int min);
 void    sort_these_five(t_node **a, t_node **b);
 void    sort_these_three(t_node **a);
-void    back_to_home(t_info *info);
-void    go_to_b(t_info *info);
-void    lets_push(t_info *info, char name);
 void    print_stack(t_node **stack, char name);
 void    set_rr(t_info *info);
 void    set_rrr(t_info *info);
 void    choose_node(t_info *info);
-void    swapper(t_info *info);
 void    init(t_info *info, int argc, char **argv);
-void    free_all(t_node **a, t_node **b);
 
 void    find_new_extremum_b(t_info *info, t_node **b);
 void    find_new_extremum_a(t_info *info, t_node **a);

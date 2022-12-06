@@ -61,7 +61,7 @@ static void    find_best_combo(t_info *info, t_node *node)
 	choose_node(info);
 }
 
-void    back_to_home(t_info *info)
+int    back_to_home(t_info *info)
 {
 	t_node	*node;
 
@@ -74,9 +74,11 @@ void    back_to_home(t_info *info)
 			node = node -> next;
 		}
 		info -> better_opt = -1;
-		lets_push(info, 'a');
+		if (!lets_push(info, 'a'))
+			return (0);
 		node = info -> b;
 		if (!node)
 			break ;
 	}
+	return (1);
 }

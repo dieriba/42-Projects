@@ -9,7 +9,7 @@ int		check_args(int argc, char **argv)
     i = 0;
     while (++i < argc)
     {
-		if (!argv[i][0] || (argv[i][0] == '0' && ft_strlen(argv[i]) > 1))
+		if (!ft_strlen(argv[i]))
 			return (0);
         if (argv[i][0] == '-' && !argv[i][1])
             return (0);
@@ -18,10 +18,7 @@ int		check_args(int argc, char **argv)
         while (argv[i][++j])
         {   
             if (!ft_isdigit(argv[i][j]))
-            {
-                ft_putstr_fd("Only digits are accepted as arguments !\n", 2);
                 return (0);
-            }
         }
         j = -1;
     }
@@ -32,15 +29,20 @@ int		check_double(int argc, char **argv)
 {
 	int	i;
 	int	j;
+	int	first;
+	int	second;
 
-	j = -1;
+
+	j = 0;
 	i = 0;
 	while (++i < argc - 1)
 	{
+		first = ft_atoi(argv[i]);
 		j = i + 1;
 		while (j < argc)
 		{
-			if (!ft_strcmp(argv[i], argv[j]))
+			second = ft_atoi(argv[j]);
+			if (first == second)
 				return (0);
 			j++;
 		}
@@ -90,23 +92,14 @@ int	check(int argc, char **argv)
 {
 	if (argc < 2)
     {
-        ft_putendl_fd("Usage: ./push_swap args1 arg2s....argsn", 2);
+        ft_putendl_fd("Usage: ./push_swap args1 arg2s....argsn\n", 0);
         return (0);
     }
 	if (!check_args(argc, argv))
-	{
-		ft_putendl_fd("Args entered are not valid", 2);
-		return (0);
-	}
-	if (!check_double(argc, argv))
-	{
-		ft_putendl_fd("A number cannont be entered more than once", 2);
-		return (0);
-	}
+		return (ft_error("Args are not valid\n", 0));
 	if (!check_number(argc, argv))
-	{
-		ft_putendl_fd("One of the numbers is above the max int or below the min int limit...", 2);
-		return (0);
-	}
+		return (ft_error("Numbers are not valid\n", 0));
+	if (!check_double(argc, argv))
+		return (ft_error("Number should be only present once\n", 0));
 	return (1);
 }
