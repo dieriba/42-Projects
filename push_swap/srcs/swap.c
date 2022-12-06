@@ -1,30 +1,6 @@
 #include "push.h"
 
-int		check_args(int argc, char **argv)
-{
-    int	i;
-    int	j;
 
-    j = -1;
-    i = 0;
-    while (++i < argc)
-    {
-        if (argv[i][0] == '-' && !argv[i][1])
-            return (0);
-        if (argv[i][0] == '-')
-			j++;
-        while (argv[i][++j])
-        {   
-            if (!ft_isdigit(argv[i][j]))
-            {
-                ft_printf("Only digits are accepted as arguments !\n");
-                return (0);
-            }
-        }
-        j = -1;
-    }
-    return (1);
-}
 
 int		sorted(t_node **stack)
 {
@@ -85,12 +61,7 @@ int main (int argc, char **argv)
 {
     t_info	info;
 
-    if (argc < 2)
-    {
-        ft_printf("Put more args than 1 args\n");
-        return (1);
-    }
-    if (!check_args(argc, argv))
+    if (!check(argc, argv))
         return (1);
     init(&info, argc, argv);
     if (!create_list(argc, argv, &info))

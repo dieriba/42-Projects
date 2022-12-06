@@ -4,6 +4,8 @@
 #include "../libft/libft.h"
 #include "../libft/ft_printf/ft_printf.h"
 #include "../libft/get_next_line/get_next_line.h"
+#define MAX_INT_S "2147483647"
+#define MIN_INT_S "-2147483648"
 
 typedef struct t_bonus
 {
@@ -60,7 +62,8 @@ typedef struct t_node
 }   t_node;
 
 int    find_med(t_node **a);
-int ft_lstsize_s(t_node *stack);
+int     ft_lstsize_s(t_node *stack);
+int     check(int argc, char **argv);
 
 t_node    *find_max(t_info *info, char name);
 t_node  *ft_lst_last_s(t_node *stack);
