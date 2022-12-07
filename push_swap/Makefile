@@ -12,7 +12,8 @@ SRCS		=	./srcs/p_a_b.c \
 				./srcs/push_to_a.c \
 				./srcs/push_to_b.c \
 				./srcs/sort_these_three.c \
-				./srcs/checker.c
+				./srcs/checker.c \
+				./srcs/parsing.c
 
 OBJS		= 	$(SRCS:.c=.o)
 

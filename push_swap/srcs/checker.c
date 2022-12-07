@@ -90,16 +90,18 @@ int		check_number(int argc, char **argv)
 
 int	check(int argc, char **argv)
 {
+	char	**tab;
+
+	tab = get_args(argc, argv);
+	if (!tab)
+		return (0);
 	if (argc < 2)
-    {
-        ft_putendl_fd("Usage: ./push_swap args1 arg2s....argsn\n", 0);
         return (0);
-    }
 	if (!check_args(argc, argv))
-		return (ft_error("Args are not valid\n", 0));
+		return (ft_error("Error\n", 0, NULL));
 	if (!check_number(argc, argv))
-		return (ft_error("Numbers are not valid\n", 0));
+		return (ft_error("Error\n", 0, NULL));
 	if (!check_double(argc, argv))
-		return (ft_error("Number should be only present once\n", 0));
+		return (ft_error("Error\n", 0, NULL));
 	return (1);
 }

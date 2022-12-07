@@ -107,8 +107,10 @@ void	setter(t_info *info, int min)
 	}
 }
 
-int ft_error(char *error, int code)
+int ft_error(char *error, int code, char **tab)
 {
     ft_putstr_fd(error, 2);
+    if (tab)
+        ft_free_tab(tab);
     return (code);
 }

@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "libft.h": "c",
-        "push.h": "c"
+        "push.h": "c",
+        "stdlib.h": "c"
     }
 }

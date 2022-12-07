@@ -60,7 +60,9 @@ int special_case(t_info *info)
 int main (int argc, char **argv)
 {
     t_info	info;
+    size_t  i;
 
+    i = -1;
     if (!check(argc, argv))
         return (1);
     init(&info, argc, argv);
@@ -73,7 +75,5 @@ int main (int argc, char **argv)
     }
     if (!swapper(&info))
         return (1);
-    // if (sorted(&info.a))
-    //     ft_printf("List is Sorted\n");
     free_all(&info.a, &info.b);
 }

@@ -61,6 +61,8 @@ typedef struct t_node
     t_node  *prev;
 }   t_node;
 
+char    **get_args(int argc, char **argv);
+
 int    find_med(t_node **a);
 int     ft_lstsize_s(t_node *stack);
 int     check(int argc, char **argv);
@@ -69,7 +71,7 @@ int    go_to_b(t_info *info);
 int    swapper(t_info *info);
 int    lets_push(t_info *info, char name);
 int    back_to_home(t_info *info);
-int ft_error(char *error, int code);
+int     ft_error(char *error, int code, char **tab);
 
 t_node    *find_max(t_info *info, char name);
 t_node  *ft_lst_last_s(t_node *stack);
