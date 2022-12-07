@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/07 13:46:45 by dtoure            #+#    #+#             */
+/*   Updated: 2022/12/07 13:48:18 by dtoure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push.h"
 
-char    **free_splited(char ***tab)
+char	**free_splited(char ***tab)
 {
-	size_t  i;
+	size_t	i;
 
 	i = -1;
 	while (tab[++i])
@@ -11,9 +23,9 @@ char    **free_splited(char ***tab)
 	return (NULL);
 }
 
-char     **copy_over(char **tab, char *num)
+char	**copy_over(char **tab, char *num)
 {
-	static int i;
+	static int	i;
 
 	tab[i] = ft_strdup(num);
 	if (!tab[i])
@@ -22,7 +34,7 @@ char     **copy_over(char **tab, char *num)
 	return (tab);
 }
 
-char    **set_tabs(char ***tab, int len)
+char	**set_tabs(char ***tab, int len)
 {
 	char	**tabs;
 	size_t	i;
@@ -44,16 +56,16 @@ char    **set_tabs(char ***tab, int len)
 	return (tabs);
 }
 
-char    **get_args(int argc, char **argv)
+char	**get_args(int argc, char **argv)
 {
-	int  i;
-	char    ***tab;
-	int     tablen;
-	char    **tabs;
+	int		i;
+	char	***tab;
+	int		tablen;
+	char	**tabs;
 
 	i = -1;
 	tablen = 0;
-	tab = malloc(sizeof(char**) * argc);
+	tab = malloc(sizeof(char **) * argc);
 	if (!tab)
 		return (NULL);
 	tab[argc - 1] = 0;

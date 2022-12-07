@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_to_a.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/07 13:44:53 by dtoure            #+#    #+#             */
+/*   Updated: 2022/12/07 13:46:40 by dtoure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push.h"
 
 static	t_node	*find_min(t_info *info)
 {
-	t_node  *node;
+	t_node	*node;
 	int		min;
 
 	min = info -> a_min;
@@ -10,21 +22,21 @@ static	t_node	*find_min(t_info *info)
 	while (node)
 	{
 		if (node -> num == min)
-			break;
+			break ;
 		node = node -> next;
 	}
 	return (node);
 }
 
-static t_node    *set_ra_pos(t_info *info, t_node *node)
+static t_node	*set_ra_pos(t_info *info, t_node *node)
 {
-	t_node  *a;
-	t_node  *tmp;
-	int     flags;
+	t_node	*a;
+	t_node	*tmp;
+	int		flags;
 
 	flags = 0;
 	a = info -> a;
-	tmp = node;      
+	tmp = node;
 	while (a)
 	{
 		if (node -> num < a -> num && !flags)
@@ -37,7 +49,7 @@ static t_node    *set_ra_pos(t_info *info, t_node *node)
 			tmp = a;
 			break ;
 		}
-		if (flags && (node -> num < a -> num) 
+		if (flags && (node -> num < a -> num)
 			&& (tmp -> num > a -> num))
 			tmp = a;
 		a = a -> next;
@@ -45,9 +57,9 @@ static t_node    *set_ra_pos(t_info *info, t_node *node)
 	return (tmp);
 }
 
-static void    find_best_combo(t_info *info, t_node *node)
+static void	find_best_combo(t_info *info, t_node *node)
 {
-	t_node  *res;
+	t_node	*res;
 
 	info -> tmp_rb = node -> index - 1;
 	info -> tmp_rrb = info -> lst_size_b - node -> index + 1;
@@ -61,11 +73,11 @@ static void    find_best_combo(t_info *info, t_node *node)
 	choose_node(info);
 }
 
-int    back_to_home(t_info *info)
+int	back_to_home(t_info *info)
 {
 	t_node	*node;
 
-    node = info -> b;
+	node = info -> b;
 	while (1)
 	{
 		while (node)

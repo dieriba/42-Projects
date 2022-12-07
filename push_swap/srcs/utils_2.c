@@ -1,44 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/07 13:34:19 by dtoure            #+#    #+#             */
+/*   Updated: 2022/12/07 16:02:18 by dtoure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push.h"
 
 void	find_new_extremum_b(t_info *info, t_node **b)
 {
-	t_node  *node;
+	t_node	*node;
 
 	node = (*b);
 	if (!node)
 		return ;
 	info -> b_max = node -> num;
 	info -> b_min = node -> num;
-    while (node)
-    {
-        if (info -> b_min > node -> num)
-            info -> b_min = node -> num;
-        else if (info -> b_max < node -> num)
-            info -> b_max = node -> num;
-        node = node -> next;
-    }
+	while (node)
+	{
+		if (info -> b_min > node -> num)
+			info -> b_min = node -> num;
+		else if (info -> b_max < node -> num)
+			info -> b_max = node -> num;
+		node = node -> next;
+	}
 }
 
-void    find_new_extremum_a(t_info *info, t_node **a)
+void	find_new_extremum_a(t_info *info, t_node **a)
 {
-    t_node  *node;
+	t_node	*node;
 
-    node = (*a);
+	node = (*a);
 	if (!node)
 		return ;
 	info -> a_max = node -> num;
 	info -> a_min = node -> num;
-    while (node)
-    {
-        if (info -> a_min > node -> num)
-            info -> a_min = node -> num;
-        else if (info -> a_max < node -> num)
-            info -> a_max = node -> num;
-        node = node -> next;
-    }
+	while (node)
+	{
+		if (info -> a_min > node -> num)
+			info -> a_min = node -> num;
+		else if (info -> a_max < node -> num)
+			info -> a_max = node -> num;
+		node = node -> next;
+	}
 }
 
-void    set_rr(t_info *info)
+void	set_rr(t_info *info)
 {
 	if (info -> ra < info -> rb)
 	{
@@ -60,7 +72,7 @@ void    set_rr(t_info *info)
 	}
 }
 
-void    set_rrr(t_info *info)
+void	set_rrr(t_info *info)
 {
 	if (info -> rra < info -> rrb)
 	{

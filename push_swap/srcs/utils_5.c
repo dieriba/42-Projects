@@ -84,38 +84,38 @@ void	sort_tab(t_info *info, int *tab)
 	}
 }
 
-int    find_med(t_node **a)
+int	find_med(t_node **a)
 {
 	int		*tab;
 	t_node	*node;
 	int		i;
 	int		size;
 
-	size = (*a) -> info -> lst_size_a;
+	size = (*a)-> info -> lst_size_a;
 	node = (*a);
-	i = -1;	
+	i = -1;
 	tab = malloc(sizeof(int) * size);
 	if (!tab)
 		return (0);
 	while (++i < size)
 	{
 		tab[i] = node -> num;
-		node = node -> next; 
+		node = node -> next;
 	}
-	sort_tab((*a) -> info, tab);
-	(*a) -> info -> med = tab[size / 2];
+	sort_tab((*a)-> info, tab);
+	(*a)-> info -> med = tab[size / 2];
 	free(tab);
 	return (1);
 }
 
-void    sort_these_five(t_node **a, t_node **b)
+void	sort_these_five(t_node **a, t_node **b)
 {
-    t_info *info;
+	t_info	*info;
 
-    info = (*a) -> info;
-    p_a_b(a, b, 'b');
-    info -> b_min = (*b) -> num;
-    info -> b_max = (*b) -> num; 
-    p_a_b(a, b, 'b');
-    sort_these_three(&info -> a);
+	info = (*a)-> info;
+	p_a_b(a, b, 'b');
+	info -> b_min = (*b)-> num;
+	info -> b_max = (*b)-> num;
+	p_a_b(a, b, 'b');
+	sort_these_three(&info -> a);
 }

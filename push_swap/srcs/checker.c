@@ -1,10 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/07 13:51:59 by dtoure            #+#    #+#             */
+/*   Updated: 2022/12/07 15:31:16 by dtoure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push.h"
 
-int		check_space(char *str)
+int	check_space(char *str)
 {
 	size_t	i;
+	size_t	len;
 	int		flags;
 
+	len = ft_strlen(str);
 	i = 0;
 	flags = 1;
 	while (str[i])
@@ -17,7 +31,7 @@ int		check_space(char *str)
 			return (0);
 		else if (str[i] == '-')
 			i++;
-		if (str[i] && !ft_isdigit(str[i]))
+		if (str[i] && !ft_isdigit(str[i]) && i < len)
 			return (0);
 		flags = 0;
 		i++;
@@ -25,30 +39,30 @@ int		check_space(char *str)
 	return (1);
 }
 
-int		check_args(int argc, char **argv)
-{
-    int	i;
-
-    i = 0;
-    while (++i < argc)
-    {
-		if (!ft_strlen(argv[i]))
-			return (0);
-        if (argv[i][0] == '-' && !argv[i][1])
-            return (0);
-		if (!check_space(argv[i]))
-			return (0);
-    }
-    return (1);
-}
-
-int		check_double(char **argv)
+int	check_args(int argc, char **argv)
 {
 	int	i;
-	int	j;
+
+	i = 0;
+	while (++i < argc)
+	{
+		if (!ft_strlen(argv[i]))
+			return (0);
+		if (argv[i][0] == '-' && !argv[i][1])
+			return (0);
+		if (!check_space(argv[i]))
+			return (0);
+	}
+	return (1);
+}
+
+int	check_double(char **argv)
+{
+	int		i;
+	int		j;
 	long	first;
 	long	second;
-	int	len;
+	int		len;
 
 	j = 0;
 	i = -1;
@@ -68,8 +82,7 @@ int		check_double(char **argv)
 	return (1);
 }
 
-
-int		check_number(char **argv)
+int	check_number(char **argv)
 {
 	int		i;
 	long	num;
@@ -91,7 +104,7 @@ int	check(int argc, char **argv, char **tab)
 	if (argc < 2)
 	{
 		ft_free_tab(tab);
-        return (0);
+		return (0);
 	}
 	if (!check_args(argc, argv))
 		return (ft_error("Error\n", 0, tab));
