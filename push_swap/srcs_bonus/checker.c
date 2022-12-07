@@ -6,11 +6,11 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 13:51:59 by dtoure            #+#    #+#             */
-/*   Updated: 2022/12/08 00:35:23 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/12/08 00:37:26 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push.h"
+#include "push_bonus.h"
 
 int	check_space(char *str)
 {
@@ -36,7 +36,7 @@ int	check_space(char *str)
 		flags = 0;
 		i++;
 	}
-	if (str[len - 1] == '-' || str[len - 1] == '+')
+	if (str[len - 1] == '-' || str[len] == '+')
 		return (0);
 	return (1);
 }

@@ -6,11 +6,11 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 13:39:48 by dtoure            #+#    #+#             */
-/*   Updated: 2022/12/07 23:32:46 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/12/07 22:24:23 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push.h"
+#include "push_bonus.h"
 
 int	sorted(t_node **stack)
 {
@@ -56,40 +56,22 @@ int	create_list(char **argv, t_info *info)
 	return (1);
 }
 
-int	special_case(t_info *info)
+int	special_case(t_info *info, char **tab)
 {
 	if (sorted(&info -> a))
-		return (0);
-	if (info -> lst_size_a == 3)
 	{
-		sort_these_three(&info -> a);
+		ft_printf("List is already sorted\n");
+		free_all(&info -> a, &info -> b);
+		ft_free_tab(tab);
 		return (0);
 	}
 	return (1);
 }
 
-int	main(int argc, char **argv)
+int	ft_error(char *error, int code, char **tab)
 {
-	t_info	info;
-	char	**tab;
-
-	if (argc < 2)
-		return (1);
-	tab = get_args(argc, argv);
-	if (!tab)
-		return (ft_error("Error\n", 0, NULL));
-	if (!check(argc, argv, tab))
-		return (1);
-	init(&info, argc, argv);
-	if (!create_list(tab, &info))
-		return (1);
-	ft_free_tab(tab);
-	if (!special_case(&info))
-	{
-		free_all(&info.a, &info.b);
-		return (0);
-	}
-	if (!swapper(&info))
-		return (1);
-	free_all(&info.a, &info.b);
+	ft_putstr_fd(error, 2);
+	if (tab)
+		ft_free_tab(tab);
+	return (code);
 }

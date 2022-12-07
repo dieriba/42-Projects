@@ -1,6 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
+/*   push_bonus.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/07 22:41:12 by dtoure            #+#    #+#             */
+/*   Updated: 2022/12/07 22:41:12 by dtoure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
 /*   push.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
@@ -10,8 +22,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_H
-# define PUSH_H 
+#ifndef PUSH_BONUS_H
+# define PUSH_BONUS_H
+
+# define PA_ "pa\n"
+# define PB_ "pb\n"
+# define RA_ "ra\n"
+# define RB_ "rb\n"
+# define RRA_ "rra\n"
+# define RRB_ "rrb\n"
+# define RRR_ "rrr\n"
+# define RR_ "rr\n"
+# define SA_ "sa\n"
+# define SB_ "sb\n"
+# define SS_ "ss\n"
 
 # include "../libft/libft.h"
 # include "../libft/ft_printf/ft_printf.h"
@@ -57,28 +81,19 @@ typedef struct t_node
 
 char	**get_args(int argc, char **argv);
 
-int		find_med(t_node **a);
 int		ft_lstsize_s(t_node *stack);
 int		check(int argc, char **argv, char **tab);
 int		free_all(t_node **a, t_node **b);
-int		go_to_b(t_info *info);
-int		swapper(t_info *info);
-int		lets_push(t_info *info, char name);
-int		back_to_home(t_info *info);
 int		ft_error(char *error, int code, char **tab);
+int		create_list(char **argv, t_info *info);
+int		special_case(t_info *info, char **tab);
+int		sorted(t_node **stack);
 
-t_node	*find_max(t_info *info, char name);
 t_node	*ft_lst_last_s(t_node *stack);
 t_node	*create_node(long int num, t_info *info, int argc);
 t_node	*ft_lst_add_front_s(t_node **node, t_node *new);
 
-void	setter(t_info *info, int min);
-void	sort_these_five(t_node **a, t_node **b);
-void	sort_these_three(t_node **a);
 void	print_stack(t_node **stack, char name);
-void	set_rr(t_info *info);
-void	set_rrr(t_info *info);
-void	choose_node(t_info *info);
 void	init(t_info *info, int argc, char **argv);
 void	update(char stack_n, t_node **node, t_node **stack);
 void	update_stacks(t_node **stack, char name);
