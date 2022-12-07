@@ -50,9 +50,7 @@ char    **get_args(int argc, char **argv)
 	char    ***tab;
 	int     tablen;
 	char    **tabs;
-	int     j;
 
-	j = -1;
 	i = -1;
 	tablen = 0;
 	tab = malloc(sizeof(char**) * argc);

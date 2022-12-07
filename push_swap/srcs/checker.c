@@ -1,11 +1,34 @@
 #include "push.h"
 
+int		check_space(char *str)
+{
+	size_t	i;
+	int		flags;
+
+	i = 0;
+	flags = 1;
+	while (str[i])
+	{
+		while (str[i] && str[i] == ' ')
+			i++;
+		if (!str[i] && flags)
+			return (0);
+		if (i != 0 && str[i] == '-' && str[i - 1] != ' ')
+			return (0);
+		else if (str[i] == '-')
+			i++;
+		if (str[i] && !ft_isdigit(str[i]))
+			return (0);
+		flags = 0;
+		i++;
+	}
+	return (1);
+}
+
 int		check_args(int argc, char **argv)
 {
     int	i;
-    int	j;
 
-    j = -1;
     i = 0;
     while (++i < argc)
     {
@@ -13,33 +36,28 @@ int		check_args(int argc, char **argv)
 			return (0);
         if (argv[i][0] == '-' && !argv[i][1])
             return (0);
-        if (argv[i][0] == '-')
-			j++;
-        while (argv[i][++j])
-        {   
-            if (!ft_isdigit(argv[i][j]))
-                return (0);
-        }
-        j = -1;
+		if (!check_space(argv[i]))
+			return (0);
     }
     return (1);
 }
 
-int		check_double(int argc, char **argv)
+int		check_double(char **argv)
 {
 	int	i;
 	int	j;
-	int	first;
-	int	second;
-
+	long	first;
+	long	second;
+	int	len;
 
 	j = 0;
-	i = 0;
-	while (++i < argc - 1)
+	i = -1;
+	len = ft_tab_len(argv);
+	while (++i < len - 1)
 	{
 		first = ft_atoi(argv[i]);
 		j = i + 1;
-		while (j < argc)
+		while (j < len)
 		{
 			second = ft_atoi(argv[j]);
 			if (first == second)
@@ -50,58 +68,36 @@ int		check_double(int argc, char **argv)
 	return (1);
 }
 
-int		check_max_min(char *number, int len)
-{
-	size_t	i;
-	char	*str;
 
-	if (len == 11)
-		str = MIN_INT_S;
-	else
-		str = MAX_INT_S;
+int		check_number(char **argv)
+{
+	int		i;
+	long	num;
+
 	i = -1;
-	while (number[++i])
+	while (argv[++i])
 	{
-		if (number[i] > str[i])
+		num = ft_atoi(argv[i]);
+		if (num > 2147483647)
+			return (0);
+		else if (num < -2147483648)
 			return (0);
 	}
 	return (1);
 }
 
-int		check_number(int argc, char **argv)
+int	check(int argc, char **argv, char **tab)
 {
-	int	i;
-	int	len;
-
-	i = 0;
-	while (++i < argc)
-	{
-		len = ft_strlen(argv[i]);
-		if (argv[i][0] == '-' && len > 11)
-			return (0);
-		else if (argv[i][0] != '-' && len  > 10)
-			return (0);
-		if (len == 10 || len == 11)
-			if (!check_max_min(argv[i], len))
-				return (0);
-	}
-	return (1);
-}
-
-int	check(int argc, char **argv)
-{
-	char	**tab;
-
-	tab = get_args(argc, argv);
-	if (!tab)
-		return (0);
 	if (argc < 2)
+	{
+		ft_free_tab(tab);
         return (0);
+	}
 	if (!check_args(argc, argv))
-		return (ft_error("Error\n", 0, NULL));
-	if (!check_number(argc, argv))
-		return (ft_error("Error\n", 0, NULL));
-	if (!check_double(argc, argv))
-		return (ft_error("Error\n", 0, NULL));
+		return (ft_error("Error\n", 0, tab));
+	if (!check_number(tab))
+		return (ft_error("Error\n", 0, tab));
+	if (!check_double(tab))
+		return (ft_error("Error\n", 0, tab));
 	return (1);
 }

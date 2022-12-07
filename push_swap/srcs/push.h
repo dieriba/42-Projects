@@ -65,7 +65,7 @@ char    **get_args(int argc, char **argv);
 
 int    find_med(t_node **a);
 int     ft_lstsize_s(t_node *stack);
-int     check(int argc, char **argv);
+int     check(int argc, char **argv, char **tab);
 int    free_all(t_node **a, t_node **b);
 int    go_to_b(t_info *info);
 int    swapper(t_info *info);

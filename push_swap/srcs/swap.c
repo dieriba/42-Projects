@@ -21,19 +21,21 @@ int		sorted(t_node **stack)
     return (1);
 }
 
-int    create_list(int argc, char **argv, t_info *info)
+int    create_list(char **argv, t_info *info)
 {
     int		num;
     t_node	*node;
+    int     tablen;
 
-    while (--argc > 0)
+    tablen = ft_tab_len(argv);
+    while (--tablen >= 0)
     {
-        num = ft_atoi(argv[argc]);
+        num = ft_atoi(argv[tablen]);
         if (num > info -> a_max)
             info -> a_max = num;
         else if (num < info -> a_min)
             info -> a_min = num;
-        node = create_node(ft_atoi(argv[argc]), info, --info -> argc);
+        node = create_node(ft_atoi(argv[tablen]), info, tablen - 1);
         if (!node)
             return (0);
         ft_lst_add_front_s(&info -> a, node);
@@ -60,14 +62,17 @@ int special_case(t_info *info)
 int main (int argc, char **argv)
 {
     t_info	info;
-    size_t  i;
+    char    **tab;
 
-    i = -1;
-    if (!check(argc, argv))
+    tab = get_args(argc, argv);
+    if (!tab)
+        return (ft_error("Error\n", 0, NULL));
+    if (!check(argc, argv, tab))
         return (1);
     init(&info, argc, argv);
-    if (!create_list(argc, argv, &info))
+    if (!create_list(tab, &info))
         return (1);
+    ft_free_tab(tab);
     if (!special_case(&info))
     {
         free_all(&info.a, &info.b);

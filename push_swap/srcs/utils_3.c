@@ -78,7 +78,7 @@ void    print_stack(t_node **stack, char name)
         ft_printf("\tSTACK B\t\n");
     while (node)
     {
-        ft_printf("\t%d\t\n", node -> num);
+        ft_printf("\tValue : %d Index : %d\t\n", node -> num, node -> index);
         node = node -> next;
     }
 }
