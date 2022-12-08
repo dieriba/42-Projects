@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 13:39:48 by dtoure            #+#    #+#             */
-/*   Updated: 2022/12/07 23:32:46 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/12/08 15:44:27 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ int	main(int argc, char **argv)
 		return (1);
 	tab = get_args(argc, argv);
 	if (!tab)
-		return (ft_error("Error\n", 0, NULL));
+		return (ft_error(NULL, "Error\n", 1, NULL));
 	if (!check(argc, argv, tab))
-		return (1);
+		return (ft_error(NULL, "Error\n", 1, tab));
 	init(&info, argc, argv);
 	if (!create_list(tab, &info))
-		return (1);
+		return (ft_error(&info, "Error\n", 1, tab));
 	ft_free_tab(tab);
 	if (!special_case(&info))
 	{

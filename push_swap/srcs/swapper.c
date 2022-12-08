@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 13:35:52 by dtoure            #+#    #+#             */
-/*   Updated: 2022/12/07 15:54:24 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/12/08 15:21:11 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ int	swapper(t_info *info)
 	else
 	{
 		if (!find_med(&info -> a))
-			return (free_all(&info -> a, &info -> b));
+			return (0);
 		if (!go_to_b(info))
-			return (free_all(&info -> a, &info -> b));
+			return (0);
 		sort_these_three(&info -> a);
 		if (!back_to_home(info))
-			return (free_all(&info -> a, &info -> b));
+			return (0);
 		ascending_list(&info -> a);
 	}
 	return (1);

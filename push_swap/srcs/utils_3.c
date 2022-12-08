@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 13:31:16 by dtoure            #+#    #+#             */
-/*   Updated: 2022/12/07 13:57:32 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/12/08 15:44:59 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,12 @@ void	setter(t_info *info, int min)
 	}
 }
 
-int	ft_error(char *error, int code, char **tab)
+int	ft_error(t_info *info, char *error, int code, char **tab)
 {
 	ft_putstr_fd(error, 2);
 	if (tab)
 		ft_free_tab(tab);
+	if (info)
+		free_all(&info -> a, &info -> b);
 	return (code);
 }

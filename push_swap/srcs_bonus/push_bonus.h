@@ -84,7 +84,7 @@ char	**get_args(int argc, char **argv);
 int		ft_lstsize_s(t_node *stack);
 int		check(int argc, char **argv, char **tab);
 int		free_all(t_node **a, t_node **b);
-int		ft_error(char *error, int code, char **tab);
+int		ft_error(t_info *info, char *error, int code, char **tab);
 int		create_list(char **argv, t_info *info);
 int		special_case(t_info *info, char **tab);
 int		sorted(t_node **stack);

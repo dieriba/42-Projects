@@ -65,7 +65,7 @@ int		go_to_b(t_info *info);
 int		swapper(t_info *info);
 int		lets_push(t_info *info, char name);
 int		back_to_home(t_info *info);
-int		ft_error(char *error, int code, char **tab);
+int		ft_error(t_info *info, char *error, int code, char **tab);
 
 t_node	*find_max(t_info *info, char name);
 t_node	*ft_lst_last_s(t_node *stack);

@@ -12,6 +12,17 @@
 
 #include "push_bonus.h"
 
+void	print(t_info *info, int size, int err)
+{
+	if (!err && sorted(&info -> a)
+		&& info -> lst_size_a == size)
+		ft_printf("OK\n");
+	else if (err)
+		ft_putstr_fd("Error\n", 2);
+	else
+		ft_putstr_fd("KO\n", 2);
+}
+
 void	lets_sort(t_info *info, char *actions)
 {
 	if (!actions)
@@ -45,40 +56,43 @@ int	check_line(char *line)
 	if (!line)
 		return (0);
 	if (!ft_strcmp(line, PA_))
-		return (1);
+		return (0);
 	else if (!ft_strcmp(line, PB_))
-		return (1);
+		return (0);
 	else if (!ft_strcmp(line, RA_))
-		return (1);
+		return (0);
 	else if (!ft_strcmp(line, RB_))
-		return (1);
+		return (0);
 	else if (!ft_strcmp(line, RRB_))
-		return (1);
+		return (0);
 	else if (!ft_strcmp(line, RRA_))
-		return (1);
+		return (0);
 	else if (!ft_strcmp(line, RRR_))
-		return (1);
+		return (0);
 	else if (!ft_strcmp(line, RR_))
-		return (1);
+		return (0);
 	else if (!ft_strcmp(line, SS_))
-		return (1);
+		return (0);
 	else if (!ft_strcmp(line, SA_))
-		return (1);
+		return (0);
 	else if (!ft_strcmp(line, SB_))
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 void	swap(t_info *info)
 {
 	char	*line;
 	int		size;
+	int		err;
 
+	err = 0;
 	size = info -> lst_size_a;
 	while (1)
 	{
 		line = get_next_line(0, 1);
-		if (!check_line(line))
+		err = check_line(line);
+		if (err)
 			break ;
 		lets_sort(info, line);
 		if (!line)
@@ -88,11 +102,7 @@ void	swap(t_info *info)
 	get_next_line(0, 0);
 	if (line)
 		free(line);
-	if (sorted(&info -> a)
-		&& info -> lst_size_a == size)
-		ft_printf("OK\n");
-	else
-		ft_printf("KO\n");
+	print(info, size, err);
 }
 
 int	main(int argc, char **argv)
@@ -104,13 +114,13 @@ int	main(int argc, char **argv)
 		return (1);
 	tab = get_args(argc, argv);
 	if (!tab)
-		return (ft_error("Error\n", 0, 0));
+		return (ft_error(0, "Error\n", 1, 0));
 	if (!check(argc, argv, tab))
-		return (1);
+		return (ft_error(NULL, "Error\n", 1, tab));
 	init(&info, argc, argv);
 	if (!create_list(tab, &info))
-		return (1);
-	swap(&info);
+		return (ft_error(&info, "Error\n", 1, tab));
 	ft_free_tab(tab);
+	swap(&info);
 	free_all(&info.a, &info.b);
 }

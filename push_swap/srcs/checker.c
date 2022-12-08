@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 13:51:59 by dtoure            #+#    #+#             */
-/*   Updated: 2022/12/08 00:35:23 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/12/08 15:33:54 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,10 @@ int	check_number(char **argv)
 int	check(int argc, char **argv, char **tab)
 {
 	if (!check_args(argc, argv))
-		return (ft_error("Error\n", 0, tab));
+		return (0);
 	if (!check_number(tab))
-		return (ft_error("Error\n", 0, tab));
+		return (0);
 	if (!check_double(tab))
-		return (ft_error("Error\n", 0, tab));
+		return (0);
 	return (1);
 }

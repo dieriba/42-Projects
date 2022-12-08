@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 13:39:48 by dtoure            #+#    #+#             */
-/*   Updated: 2022/12/08 01:28:05 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/12/08 15:47:02 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,12 @@ int	create_list(char **argv, t_info *info)
 	return (1);
 }
 
-int	ft_error(char *error, int code, char **tab)
+int	ft_error(t_info *info, char *error, int code, char **tab)
 {
 	ft_putstr_fd(error, 2);
 	if (tab)
 		ft_free_tab(tab);
+	if (info)
+		free_all(&info -> a, &info -> b);
 	return (code);
 }
