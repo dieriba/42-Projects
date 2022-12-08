@@ -107,13 +107,9 @@ int	main(int argc, char **argv)
 		return (ft_error("Error\n", 0, 0));
 	if (!check(argc, argv, tab))
 		return (1);
-	if (argc == 2)
-		return (0);
 	init(&info, argc, argv);
 	if (!create_list(tab, &info))
 		return (1);
-	if (!special_case(&info, tab))
-		return (0);
 	swap(&info);
 	ft_free_tab(tab);
 	free_all(&info.a, &info.b);

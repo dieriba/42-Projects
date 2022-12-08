@@ -6,7 +6,7 @@
 /*   By: dtoure <dtoure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 13:39:48 by dtoure            #+#    #+#             */
-/*   Updated: 2022/12/07 22:24:23 by dtoure           ###   ########.fr       */
+/*   Updated: 2022/12/08 01:28:05 by dtoure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,6 @@ int	create_list(char **argv, t_info *info)
 		tablen--;
 	}
 	info -> lst_size_a = ft_lstsize_s(info -> a);
-	return (1);
-}
-
-int	special_case(t_info *info, char **tab)
-{
-	if (sorted(&info -> a))
-	{
-		ft_printf("List is already sorted\n");
-		free_all(&info -> a, &info -> b);
-		ft_free_tab(tab);
-		return (0);
-	}
 	return (1);
 }
 

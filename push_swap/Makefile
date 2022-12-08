@@ -53,7 +53,7 @@ $(SWAP):	${OBJS}
 
 all:		$(SWAP)
 
-$(CHECKER):	$(OBJS_BONUS)
+bonus:		$(OBJS_BONUS)
 			make -C ./libft/ft_printf
 			cp ./libft/ft_printf/libprintf.a ./lib
 			make -C ./libft
@@ -75,4 +75,4 @@ re:			fclean all
 
 -include : $(DEPS)
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re bonus
